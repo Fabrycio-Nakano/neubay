@@ -1,0 +1,37 @@
+Bootstrap: docker
+From: ubuntu:24.04
+
+%files
+    requirements.yml /requirements.yml
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update && apt-get install -y \
+        wget bzip2 git build-essential libgl1 libglx-mesa0 libosmesa6-dev \
+        libglew-dev libglfw3 libpciaccess0 apt-utils
+    rm -rf /var/lib/apt/lists/*
+
+    mkdir -p /tmp/mamba && cd /tmp/mamba
+    wget -q https://micro.mamba.pm/api/micromamba/linux-64/latest -O micromamba.tar.bz2
+    tar -xj -f micromamba.tar.bz2 bin/micromamba
+    cp bin/micromamba /usr/bin/micromamba
+    chmod +x /usr/bin/micromamba
+    cd / && rm -rf /tmp/mamba
+
+    micromamba create -y -p /opt/neubay -f /requirements.yml
+
+    /opt/neubay/bin/pip install --upgrade pip
+    /opt/neubay/bin/pip install --upgrade "jax[cuda12]"
+
+    /opt/neubay/bin/pip install git+https://github.com/aravindr93/mjrl.git
+    /opt/neubay/bin/pip install git+https://github.com/Farama-Foundation/D4RL.git
+
+    micromamba clean --all -y
+
+%environment
+    export PATH="/opt/neubay/bin:$PATH"
+    export XLA_PYTHON_CLIENT_PREALLOCATE=false
+    export PYTHONPATH="/workspace:$PYTHONPATH"
+
+%runscript
+    exec "$@"

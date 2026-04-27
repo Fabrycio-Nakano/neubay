@@ -3,18 +3,18 @@ import gym, d4rl
 # https://github.com/Farama-Foundation/D4RL/wiki/Tasks
 dataset_names = [
     # mujoco domain: all have next_observations
-    # "halfcheetah-random-v2",
-    # "halfcheetah-medium-v2",
-    # "halfcheetah-medium-replay-v2",
-    # "halfcheetah-medium-expert-v2",
-    # "hopper-random-v2",
-    # "hopper-medium-v2",
-    # "hopper-medium-replay-v2",
-    # "hopper-medium-expert-v2",
+     "halfcheetah-random-v2",
+     "halfcheetah-medium-v2",
+     "halfcheetah-medium-replay-v2",
+     "halfcheetah-medium-expert-v2",
+     "hopper-random-v2",
+     "hopper-medium-v2",
+     "hopper-medium-replay-v2",
+     "hopper-medium-expert-v2",
     # "walker2d-random-v2",
     # "walker2d-medium-v2",
-    # "walker2d-medium-replay-v2",
-    # "walker2d-medium-expert-v2",
+     "walker2d-medium-replay-v2",
+     "walker2d-medium-expert-v2",
     # antmaze domain: all **do not** have next_observations, used in LEQ
     # v2 and v0 has same datasets, but v2 evaluation is more stable: https://github.com/Farama-Foundation/D4RL/pull/128
     # "antmaze-umaze-v2",
@@ -32,15 +32,15 @@ dataset_names = [
     # "hammer-human-v1",
     # "hammer-cloned-v1",
     # neorl domain: all have next_observations, but not timeouts
-    # "HalfCheetah-v3-low",
-    # "HalfCheetah-v3-medium",
-    # "HalfCheetah-v3-high",
-    # "Hopper-v3-low",
-    # "Hopper-v3-medium",
-    # "Hopper-v3-high",
-    # "Walker2d-v3-low",
-    # "Walker2d-v3-medium",
-    # "Walker2d-v3-high",
+     "HalfCheetah-v3-low",
+     "HalfCheetah-v3-medium",
+     "HalfCheetah-v3-high",
+     "Hopper-v3-low",
+     "Hopper-v3-medium",
+     "Hopper-v3-high",
+     "Walker2d-v3-low",
+     "Walker2d-v3-medium",
+     "Walker2d-v3-high",
 ]
 
 for dataset_name in dataset_names:

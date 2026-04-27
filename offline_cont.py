@@ -74,10 +74,12 @@ def main(cfg: DictConfig):
 
     name = datetime.now().strftime("%m-%d-%H-%M-%S")
     name += f'-{config["seed"]}'
+    run_name = config.get("exp_name", name)
     wandb.init(
-        project=config["domain"],
-        name=name,
+        project="neubay-reproduction",
+        name=run_name,
         config=config,
+	reinit=True
     )
 
     """

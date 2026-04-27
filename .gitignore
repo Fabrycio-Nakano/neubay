@@ -10,3 +10,34 @@ logs/
 
 # soft link
 offline_world/ckpt
+
+
+#Eu mesmo adicionei
+
+# Apptainer / containers
+*.sif
+*.sif.swp
+*.swp
+
+# Cache
+.cache/
+__pycache__/
+*.pyc
+
+# Logs e outputs de Slurm
+*.out
+*.err
+slurm-*.out
+logs/
+
+# Ambientes locais
+.env
+.venv/
+venv/
+
+# Checkpoints / datasets / artefatos grandes
+checkpoints/
+datasets/
+wandb/
+runs/
+outputs/
