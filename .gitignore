@@ -41,3 +41,5 @@ datasets/
 wandb/
 runs/
 outputs/
+
+password_ovx.txt

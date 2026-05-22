@@ -5,7 +5,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
-#SBATCH --time=12:00:00
+#SBATCH --time=30:00:00
 #SBATCH --output=logs/neubay-%A_%a.out
 #SBATCH --error=logs/neubay-%A_%a.err
 
@@ -34,7 +34,7 @@ export APPTAINERENV_PYTHONWARNINGS="ignore"
 # O nome "Limpo" para o WandB
 CLEAN_NAME="${ALGO}-${DATASET_NAME}-L${LAMBDA}-S${SEED}"
 # O novo "Ambiente" (Projeto) no WandB
-NEW_PROJECT="NEUBAY-Final-Experiments"
+NEW_PROJECT="neubay-official-results"
 
 mkdir -p logs "${CACHE_DIR}/home"
 
@@ -77,4 +77,5 @@ apptainer exec --nv --no-home \
     --config-name=base \
     dataset_name=Hopper-v3-medium \
     seed=${SLURM_ARRAY_TASK_ID} \
-    +exp_name=NEUBAY-Hopper-V3-S${SLURM_ARRAY_TASK_ID}"
+    +exp_name=NEUBAY-Hopper-V3-S${SLURM_ARRAY_TASK_ID} \
+    +wandb_project=${NEW_PROJECT}"

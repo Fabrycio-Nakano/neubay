@@ -76,7 +76,7 @@ def main(cfg: DictConfig):
     name += f'-{config["seed"]}'
     run_name = config.get("exp_name", name)
     wandb.init(
-        project="neubay-reproduction",
+        project=config.get("wandb_project", "neubay-reproduction"),
         name=run_name,
         config=config,
 	reinit=True
