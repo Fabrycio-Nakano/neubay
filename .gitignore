@@ -32,6 +32,7 @@ logs/
 
 # Ambientes locais
 .env
+wandb.env
 .venv/
 venv/
 
