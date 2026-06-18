@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=NEUBAY_Succeed
+#SBATCH --job-name=NEUBAY_repro
 #SBATCH --partition=ovx01
-#SBATCH --array=3
+#SBATCH --array=0-1
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=64G
@@ -21,7 +21,8 @@ CONTAINER_HOME="/home/user_fabrycioalmada"
 WRITABLE_MUJOCO_PY="${CACHE_DIR}/mujoco_py_pkg"
 
 # Parâmetros
-DATASET_NAME="${DATASET_NAME:-hopper-medium-v2}"
+DATASET_NAME="${DATASET_NAME:-Hopper-v3-high}"
+CONFIG_PATH="configs/neorl"
 SEED="${SLURM_ARRAY_TASK_ID}"
 RUN_NAME="NEUBAY_${DATASET_NAME}_S${SEED}"
 ALGO="NEUBAY"
@@ -33,6 +34,7 @@ export APPTAINERENV_PYTHONWARNINGS="ignore"
 
 # O nome "Limpo" para o WandB
 CLEAN_NAME="${ALGO}-${DATASET_NAME}-L${LAMBDA}-S${SEED}"
+
 # O novo "Ambiente" (Projeto) no WandB
 NEW_PROJECT="neubay-official-results"
 
@@ -51,11 +53,15 @@ export APPTAINERENV_MUJOCO_GL="osmesa"
 export APPTAINERENV_PYOPENGL_PLATFORM="osmesa"
 export APPTAINERENV_XLA_PYTHON_CLIENT_ALLOCATOR="platform"
 
-########################
-# CONFIGURAÇÕES WANDB (Novo Ambiente)
-########################
-export APPTAINERENV_WANDB_API_KEY="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"
-export APPTAINERENV_WANDB_ENTITY="flnalmada-ufg"
+# Carrega as credenciais do WandB a partir do arquivo wandb.env
+if [ -f "$(dirname "$0")/wandb.env" ]; then
+    source "$(dirname "$0")/wandb.env"
+elif [ -f "${PROJECT_DIR}/wandb.env" ]; then
+    source "${PROJECT_DIR}/wandb.env"
+else
+    echo "[WARNING] wandb.env não encontrado!"
+fi
+
 export APPTAINERENV_WANDB_PROJECT="${NEW_PROJECT}"
 export APPTAINERENV_WANDB_NAME="${CLEAN_NAME}"
 export APPTAINERENV_WANDB_RUN_ID="${CLEAN_NAME}-${SLURM_ARRAY_JOB_ID}" # Garante que cada run seja única
@@ -73,9 +79,10 @@ apptainer exec --nv --no-home \
   --env HOME="${CONTAINER_HOME}" \
   "${SIF_PATH}" \
   bash -c "cd /workspace && python offline_cont.py \
-    --config-path=configs/neorl \
+    --config-path=${CONFIG_PATH} \
     --config-name=base \
-    dataset_name=Hopper-v3-medium \
-    seed=${SLURM_ARRAY_TASK_ID} \
-    +exp_name=NEUBAY-Hopper-V3-S${SLURM_ARRAY_TASK_ID} \
+    task=Hopper_v3_high \
+    dataset_name=${DATASET_NAME} \
+    seed=${SEED} \
+    +exp_name=${CLEAN_NAME} \
     +wandb_project=${NEW_PROJECT}"

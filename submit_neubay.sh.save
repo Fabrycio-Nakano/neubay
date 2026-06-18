@@ -1,0 +1,97 @@
+#!/bin/bash
+#SBATCH --job-name=NEUBAY
+#SBATCH --partition=ovx01
+#SBATCH --array=0-4
+#SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --time=12:00:00
+#SBATCH --output=logs/neubay-%A_%a.out
+#SBATCH --error=logs/neubay-%A_%a.err
+
+set -euo pipefail
+
+########################
+# CONFIGURAÇÕES DE CAMINHO
+########################
+PROJECT_DIR="/raid/user_fabrycioalmada/neubay"
+SIF_PATH="${PROJECT_DIR}/neubay.sif"
+CACHE_DIR="${PROJECT_DIR}/.cache"
+CONTAINER_HOME="/home/user_fabrycioalmada"
+
+########################
+# PARÂMETROS DO EXPERIMENTO
+########################
+# O Dataset vem do comando sbatch. Se não vier nada, o padrão é Hopper.
+DATASET_NAME="${DATASET_NAME:-Hopper-v3-low}"
+
+# A Seed é definida automaticamente pelo ID do array (0, 1 ou 2)
+SEED="${SLURM_ARRAY_TASK_ID}"
+ALGO="NEUBAY"
+LAMBDA="5.0" # Penalidade de incerteza sugerida no paper
+
+# Lógica de Nomes Estruturada para o Workspace
+RUN_NAME="${ALGO}_${DATASET_NAME}_L${LAMBDA}_S${SEED}"
+GROUP_NAME="${ALGO}_${DATASET_NAME}_L${LAMBDA}"
+
+########################
+# PREPARAÇÃO DO AMBIENTE
+########################
+mkdir -p logs "${CACHE_DIR}/pip" "${CACHE_DIR}/jax" "${CACHE_DIR}/home"
+
+# Caminhos para tornar o pacote mujoco_py editável (Resolve Read-only filesystem)
+MUJOCO_PY_PATH="/opt/neubay/lib/python3.10/site-packages/mujoco_py"
+WRITABLE_MUJOCO_PY="${CACHE_DIR}/mujoco_py_pkg"
+
+if [ ! -f "${WRITABLE_MUJOCO_PY}/generated/wrappers.pxi" ]; then
+    echo "[INFO] Cache do mujoco_py ausente ou incompleto. Recriando..."
+    rm -rf "${WRITABLE_MUJOCO_PY}"
+    apptainer exec "${SIF_PATH}" cp -r "${MUJOCO_PY_PATH}" "${WRITABLE_MUJOCO_PY}"
+fi
+
+# Carrega as credenciais do WandB a partir do arquivo wandb.env
+if [ -f "$(dirname "$0")/wandb.env" ]; then
+    source "$(dirname "$0")/wandb.env"
+elif [ -f "${PROJECT_DIR}/wandb.env" ]; then
+    source "${PROJECT_DIR}/wandb.env"
+else
+    echo "[WARNING] wandb.env não encontrado!"
+fi
+
+export APPTAINERENV_WANDB_PROJECT="neubay"
+export APPTAINERENV_WANDB_NAME="${RUN_NAME}"
+export APPTAINERENV_WANDB_GROUP="${GROUP_NAME}"
+export APPTAINERENV_WANDB_MODE="online"
+export APPTAINERENV_WANDB_DIR="/workspace/wandb/logs"
+
+# UNIFICAÇÃO DE PATHS (MUJOCO + CUDA)
+MUJOCO_BIN="${CONTAINER_HOME}/.mujoco/mujoco210/bin"
+CUDA_LIBS="/usr/local/cuda/lib64"
+
+export APPTAINERENV_LD_LIBRARY_PATH="${MUJOCO_BIN}:${CUDA_LIBS}:${LD_LIBRARY_PATH:-}"
+export APPTAINERENV_JAX_PLATFORMS="cuda,cpu"
+export APPTAINERENV_NVIDIA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-all}"
+
+export APPTAINERENV_HYDRA_FULL_ERROR=1
+
+
+echo "[INFO] Iniciando experimento: ${DATASET_NAME} | Seed: ${SEED}"
+echo "[INFO] Rodando na GPU: ${CUDA_VISIBLE_DEVICES:-0}"
+
+apptainer exec --nv --no-home \
+  --bind "${PROJECT_DIR}:/workspace" \
+  --bind "${CACHE_DIR}/pip:/root/.cache/pip" \
+  --bind "${CACHE_DIR}/jax:/root/.cache/jax" \
+  --bind "${CACHE_DIR}/home:${CONTAINER_HOME}" \
+  --bind "${WRITABLE_MUJOCO_PY}:${MUJOCO_PY_PATH}" \
+  --env HOME="${CONTAINER_HOME}" \
+  --env LD_PRELOAD="${SYSTEM_LIBSTDC}" \
+  --env MUJOCO_GL="osmesa" \
+  "${SIF_PATH}" \
+  bash -c "cd /workspace && python offline_cont.py \
+    --config-path=configs/neorl \
+    --config-name=base \
+    dataset_name=${DATASET_NAME} \
+    seed=${SEED} \
+    +penalty_coef=${LAMBDA} \
+    +exp_name=${RUN_NAME}"

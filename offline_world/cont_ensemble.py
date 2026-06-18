@@ -118,11 +118,11 @@ class LearnedContEnv:
         assert np.all(original_env.action_space.low == -1.0)
         assert np.all(original_env.action_space.high == 1.0)
 
-        name = datetime.now().strftime("%m-%d-%H-%M-%S")
-        name += f"-{seed}"
+        run_name = f"WorldModel-{dataset_name}-S{seed}"
         wandb.init(
             project=domain,
-            name=name,
+            name=run_name,
+            group="neubay_world_model",
             config=cfg,
         )
 

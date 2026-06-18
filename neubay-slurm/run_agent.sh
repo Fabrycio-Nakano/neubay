@@ -6,32 +6,15 @@
 #
 # Uso:
 #   sbatch run_agent.sh <domínio> <tarefa>
-#
-# Exemplos:
-#   sbatch run_agent.sh d4rl_loco halfcheetah_medium_expert
-#   sbatch run_agent.sh neorl Hopper_v3_low
-#   sbatch run_agent.sh adroit pen_cloned
-#   sbatch run_agent.sh antmaze umaze
-#
-# Domínios disponíveis e tarefas (configs/<domínio>/task/<tarefa>.yaml):
-#   d4rl_loco : halfcheetah_medium, halfcheetah_medium_expert,
-#               halfcheetah_medium_replay, halfcheetah_random,
-#               hopper_medium, hopper_medium_expert, hopper_medium_replay,
-#               hopper_random, walker2d_medium, walker2d_medium_expert,
-#               walker2d_medium_replay, walker2d_random
-#   neorl     : HalfCheetah_v3_{low,medium,high}, Hopper_v3_{low,medium,high},
-#               Walker2d_v3_{low,medium,high}
-#   adroit    : pen_human, pen_cloned, hammer_cloned
-#   antmaze   : umaze, umaze_diverse, medium_diverse, medium_play
 # =============================================================================
 
 #SBATCH --job-name=neubay_agent
-#SBATCH --array=0-2               # 3 seeds em paralelo (seeds 0, 1, 2)
+#SBATCH --array=0               # 3 seeds em paralelo
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8         # ~8 CPUs: JAX + 100 envs paralelos (leves)
-#SBATCH --gres=gpu:1              # 1 GPU por seed; JAX ocupa 1 device por processo
-#SBATCH --mem=32G                 # buffer de 40M steps (float32) + modelo + overhead
+#SBATCH --cpus-per-task=8         # ~8 CPUs
+#SBATCH --gres=gpu:1              # 1 GPU por seed
+#SBATCH --mem=32G                 # buffer + modelo + overhead
 #SBATCH --time=06:00:00           # agent training: ~2-4h por seed
 #SBATCH --output=/raid/%u/neubay/logs/agent_%x_%A_%a.out
 #SBATCH --error=/raid/%u/neubay/logs/agent_%x_%A_%a.err
@@ -44,15 +27,38 @@ TASK=${2:?"Informe a tarefa (e.g. halfcheetah_medium_expert)"}
 SEED=$SLURM_ARRAY_TASK_ID   # 0, 1 ou 2
 
 # --------------------------------------------------------------------------- #
-# Caminhos — NADA na home
+# Caminhos
 # --------------------------------------------------------------------------- #
 RAID_BASE="/raid/${USER}/neubay"
-REPO_DIR="${RAID_BASE}/neubay-main"
+REPO_DIR="${RAID_BASE}"
 CONTAINER="${RAID_BASE}/neubay.sif"
 WANDB_DIR="${RAID_BASE}/wandb"
 LOG_DIR="${RAID_BASE}/logs"
+CACHE_DIR="${RAID_BASE}/.cache"
+CONTAINER_HOME="/home/${USER}"
+WRITABLE_MUJOCO_PY="${CACHE_DIR}/mujoco_py_pkg"
 
-mkdir -p "${LOG_DIR}" "${WANDB_DIR}"
+mkdir -p "${LOG_DIR}" "${WANDB_DIR}" "${CACHE_DIR}/home"
+
+# --------------------------------------------------------------------------- #
+# Sincroniza credenciais do WandB da home real para a home do contêiner
+# --------------------------------------------------------------------------- #
+if [ -f "/home/${USER}/.netrc" ]; then
+    cp "/home/${USER}/.netrc" "${CACHE_DIR}/home/.netrc"
+fi
+if [ -d "/home/${USER}/.config/wandb" ]; then
+    mkdir -p "${CACHE_DIR}/home/.config"
+    cp -r "/home/${USER}/.config/wandb" "${CACHE_DIR}/home/.config/"
+fi
+
+# Carrega as credenciais do WandB a partir do arquivo wandb.env
+if [ -f "$(dirname "$0")/../wandb.env" ]; then
+    source "$(dirname "$0")/../wandb.env"
+elif [ -f "${REPO_DIR}/wandb.env" ]; then
+    source "${REPO_DIR}/wandb.env"
+else
+    echo "[WARNING] wandb.env não encontrado!"
+fi
 
 echo "============================================"
 echo "Job:      ${SLURM_JOB_ID} (array ${SLURM_ARRAY_JOB_ID}[${SLURM_ARRAY_TASK_ID}])"
@@ -64,12 +70,25 @@ echo "GPU:      $(nvidia-smi --query-gpu=name --format=csv,noheader 2>/dev/null 
 echo "============================================"
 
 # --------------------------------------------------------------------------- #
-# Execução via Apptainer
+# Configurações de GPU e MuJoCo para a OVX (Estilo submit_neubay.sh)
+# --------------------------------------------------------------------------- #
+export APPTAINERENV_LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
+export APPTAINERENV_JAX_CUDA_P2P_DISABLE=1
+export APPTAINERENV_NCCL_P2P_DISABLE=1
+export APPTAINERENV_LD_LIBRARY_PATH="/.singularity.d/libs:/usr/lib/x86_64-linux-gnu:${CONTAINER_HOME}/.mujoco/mujoco210/bin:${LD_LIBRARY_PATH:-}"
+export APPTAINERENV_MUJOCO_GL="osmesa"
+export APPTAINERENV_PYOPENGL_PLATFORM="osmesa"
+
+# --------------------------------------------------------------------------- #
+# Execução via Apptainer (Estilo submit_neubay.sh)
 # --------------------------------------------------------------------------- #
 apptainer exec \
     --nv \
-    --bind "${RAID_BASE}:${RAID_BASE}" \
-    --bind "/raid/${USER}:/raid/${USER}" \
+    --no-home \
+    --bind "${REPO_DIR}:/workspace" \
+    --bind "${CACHE_DIR}/home:${CONTAINER_HOME}" \
+    --bind "${WRITABLE_MUJOCO_PY}:/opt/neubay/lib/python3.10/site-packages/mujoco_py" \
+    --env HOME="${CONTAINER_HOME}" \
     "${CONTAINER}" \
     bash -c "
         set -e
@@ -80,8 +99,8 @@ apptainer exec \
         # wandb salva runs no raid
         export WANDB_DIR=${WANDB_DIR}
 
-        export PYTHONPATH=${REPO_DIR}:\${PYTHONPATH}
-        cd ${REPO_DIR}
+        export PYTHONPATH=/workspace:\${PYTHONPATH}
+        cd /workspace
 
         python offline_cont.py \
             --config-path=configs/${DOMAIN} \
@@ -89,5 +108,3 @@ apptainer exec \
             task=${TASK} \
             seed=${SEED}
     "
-
-echo "Job finalizado com código: $?"

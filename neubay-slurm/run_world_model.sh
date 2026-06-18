@@ -6,19 +6,6 @@
 #
 # Uso:
 #   sbatch run_world_model.sh <domínio> <dataset_name> [total_epochs]
-#
-# Exemplos:
-#   sbatch run_world_model.sh d4rl_loco hopper-random-v2 1200
-#   sbatch run_world_model.sh d4rl_loco halfcheetah-medium-replay-v2
-#   sbatch run_world_model.sh d4rl_loco walker2d-medium-v2 1200
-#   sbatch run_world_model.sh d4rl_loco halfcheetah-medium-expert-v2 600
-#   sbatch run_world_model.sh neorl Hopper-v3-low 1200
-#   sbatch run_world_model.sh adroit pen-human-v1
-#   sbatch run_world_model.sh adroit pen-cloned-v1 2400
-#   sbatch run_world_model.sh adroit hammer-cloned-v1 1200
-#   sbatch run_world_model.sh antmaze antmaze-umaze-v2 1200
-#
-# Nota: se total_epochs não for informado, o valor do config base será usado.
 # =============================================================================
 
 #SBATCH --job-name=neubay_world
@@ -28,7 +15,7 @@
 #SBATCH --cpus-per-task=6         # treinamento do world model é CPU-light
 #SBATCH --gres=gpu:1
 #SBATCH --mem=24G                 # dataset D4RL + ensemble 128 modelos
-#SBATCH --time=12:00:00           # world model pode demorar (até 2400 epochs)
+#SBATCH --time=20:00:00           # world model pode demorar (até 2400 epochs)
 #SBATCH --output=/raid/%u/neubay/logs/world_%x_%A_%a.out
 #SBATCH --error=/raid/%u/neubay/logs/world_%x_%A_%a.err
 
@@ -41,14 +28,37 @@ TOTAL_EPOCHS=${3:-""}            # opcional
 SEED=$SLURM_ARRAY_TASK_ID
 
 # --------------------------------------------------------------------------- #
-# Caminhos — NADA na home
+# Caminhos
 # --------------------------------------------------------------------------- #
 RAID_BASE="/raid/${USER}/neubay"
-REPO_DIR="${RAID_BASE}/neubay-main"
+REPO_DIR="${RAID_BASE}"
 CONTAINER="${RAID_BASE}/neubay.sif"
 LOG_DIR="${RAID_BASE}/logs"
+CACHE_DIR="${RAID_BASE}/.cache"
+CONTAINER_HOME="/home/${USER}"
+WRITABLE_MUJOCO_PY="${CACHE_DIR}/mujoco_py_pkg"
 
-mkdir -p "${LOG_DIR}"
+mkdir -p "${LOG_DIR}" "${CACHE_DIR}/home"
+
+# --------------------------------------------------------------------------- #
+# Sincroniza credenciais do WandB da home real para a home do contêiner
+# --------------------------------------------------------------------------- #
+if [ -f "/home/${USER}/.netrc" ]; then
+    cp "/home/${USER}/.netrc" "${CACHE_DIR}/home/.netrc"
+fi
+if [ -d "/home/${USER}/.config/wandb" ]; then
+    mkdir -p "${CACHE_DIR}/home/.config"
+    cp -r "/home/${USER}/.config/wandb" "${CACHE_DIR}/home/.config/"
+fi
+
+# Carrega as credenciais do WandB a partir do arquivo wandb.env
+if [ -f "$(dirname "$0")/../wandb.env" ]; then
+    source "$(dirname "$0")/../wandb.env"
+elif [ -f "${REPO_DIR}/wandb.env" ]; then
+    source "${REPO_DIR}/wandb.env"
+else
+    echo "[WARNING] wandb.env não encontrado!"
+fi
 
 echo "============================================"
 echo "Job:      ${SLURM_JOB_ID} (array ${SLURM_ARRAY_JOB_ID}[${SLURM_ARRAY_TASK_ID}])"
@@ -69,20 +79,33 @@ if [ -n "${TOTAL_EPOCHS}" ]; then
 fi
 
 # --------------------------------------------------------------------------- #
-# Execução via Apptainer
+# Configurações de GPU e MuJoCo para a OVX (Estilo submit_neubay.sh)
+# --------------------------------------------------------------------------- #
+export APPTAINERENV_LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
+export APPTAINERENV_JAX_CUDA_P2P_DISABLE=1
+export APPTAINERENV_NCCL_P2P_DISABLE=1
+export APPTAINERENV_LD_LIBRARY_PATH="/.singularity.d/libs:/usr/lib/x86_64-linux-gnu:${CONTAINER_HOME}/.mujoco/mujoco210/bin:${LD_LIBRARY_PATH:-}"
+export APPTAINERENV_MUJOCO_GL="osmesa"
+export APPTAINERENV_PYOPENGL_PLATFORM="osmesa"
+
+# --------------------------------------------------------------------------- #
+# Execução via Apptainer (Estilo submit_neubay.sh)
 # --------------------------------------------------------------------------- #
 apptainer exec \
     --nv \
-    --bind "${RAID_BASE}:${RAID_BASE}" \
-    --bind "/raid/${USER}:/raid/${USER}" \
+    --no-home \
+    --bind "${REPO_DIR}:/workspace" \
+    --bind "${CACHE_DIR}/home:${CONTAINER_HOME}" \
+    --bind "${WRITABLE_MUJOCO_PY}:/opt/neubay/lib/python3.10/site-packages/mujoco_py" \
+    --env HOME="${CONTAINER_HOME}" \
     "${CONTAINER}" \
     bash -c "
         set -e
 
         export XLA_PYTHON_CLIENT_PREALLOCATE=false
 
-        export PYTHONPATH=${REPO_DIR}:\${PYTHONPATH}
-        cd ${REPO_DIR}
+        export PYTHONPATH=/workspace:\${PYTHONPATH}
+        cd /workspace
 
         python offline_world/cont_ensemble.py \
             --config-path=../configs/${DOMAIN} \
@@ -91,5 +114,3 @@ apptainer exec \
             ${EPOCHS_ARG} \
             seed=${SEED}
     "
-
-echo "Job finalizado com código: $?"
