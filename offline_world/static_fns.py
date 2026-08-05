@@ -145,8 +145,19 @@ def termination_fn_hammer(obs, act, next_obs):
     return done
 
 
+def termination_fn_go2(obs, act, next_obs):
+    """Go2 failures are not inferable from the stored 48-D observation alone.
+
+    World-model rollouts therefore end by dataset horizon or uncertainty threshold.
+    """
+    assert len(obs.shape) == len(next_obs.shape) == len(act.shape) == 2
+    return np.zeros(len(obs), dtype=bool)
+
+
 def get_termination_fn(task: str):
-    if "halfcheetah-" in task:
+    if "Go2" in task and "Joystick" in task:
+        return termination_fn_go2
+    elif "halfcheetah-" in task:
         return termination_fn_halfcheetah
     elif "hopper-" in task:
         return termination_fn_hopper

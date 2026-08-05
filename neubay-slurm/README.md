@@ -109,6 +109,30 @@ sbatch slurm/run_agent.sh antmaze medium_play
 
 Cada `sbatch` dispara **3 seeds simultaneamente** como array job. Os logs ficam em `/raid/<user>/neubay/logs/`.
 
+### Go2 Joystick (world-model only)
+
+O Go2 usa o dataset Minari/HDF5 e checkpoints em
+`offline_world/ckpt/wm_trained/go2/Go2JoystickFlatTerrain-direction-expert-v1/`.
+A configuração atual treina e salva o agente no world model, mas não executa
+avaliação no robô/simulador real (`eval.enabled=false`).
+
+Antes do treino completo, rode uma seed curta:
+
+```bash
+sbatch --array=0 --time=01:00:00 --export=ALL,SMOKE_TEST=true \
+  neubay-slurm/run_agent_go2.sh
+```
+
+Depois que o smoke test salvar um agente sem erros, rode as seeds validadas pelos probes:
+
+```bash
+sbatch neubay-slurm/run_agent_go2.sh
+```
+
+Os agentes são salvos em
+`offline_agent/ckpt/go2/Go2JoystickFlatTerrain-direction-expert-v1/` e as runs
+são registradas no projeto W&B `neubay-go2-agent`.
+
 ---
 
 ## Passo 1b — Treinar world model do zero (opcional)

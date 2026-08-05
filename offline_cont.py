@@ -82,31 +82,9 @@ def main(cfg: DictConfig):
 	reinit=True
     )
 
-    """
-    Setup evaluation
-    """
+    """Setup optional real-environment evaluation."""
     key = random.PRNGKey(config["seed"])
     eval_key = random.PRNGKey(config["seed"] + 1000)
-
-    eval_envs = load_env(
-        config["domain"], config["dataset_name"], config["eval"]["real_episodes"]
-    )
-    evaluator = ContEvaluator(eval_envs)
-
-    obs_shape = eval_envs.envs[0].observation_space.shape
-    act_shape = eval_envs.envs[0].action_space.shape
-    max_horizon = eval_envs.envs[0].max_episode_steps
-    assert np.all(eval_envs.envs[0].action_space.high == 1.0)
-    assert np.all(eval_envs.envs[0].action_space.low == -1.0)
-    print(
-        "obs_shape",
-        obs_shape,
-        "act_shape",
-        act_shape,
-        "max_horizon",
-        max_horizon,
-        jax.default_backend(),
-    )
 
     """
     Setup world model (training envs) and collector
@@ -121,6 +99,28 @@ def main(cfg: DictConfig):
         **config["collect"],
     )
     collector = ContCollector(train_envs)
+
+    if config["eval"].get("enabled", True):
+        eval_envs = load_env(
+            config["domain"], config["dataset_name"], config["eval"]["real_episodes"]
+        )
+        evaluator = ContEvaluator(eval_envs)
+        obs_shape = eval_envs.envs[0].observation_space.shape
+        act_shape = eval_envs.envs[0].action_space.shape
+        max_horizon = eval_envs.envs[0].max_episode_steps
+        assert np.all(eval_envs.envs[0].action_space.high == 1.0)
+        assert np.all(eval_envs.envs[0].action_space.low == -1.0)
+    else:
+        evaluator = None
+        obs_shape = (train_envs.state_dim + train_envs.act_dim + 1,)
+        act_shape = (train_envs.act_dim,)
+        max_horizon = train_envs.max_horizon
+        print("Real-environment evaluation disabled (world-model-only mode).")
+
+    print(
+        "obs_shape", obs_shape, "act_shape", act_shape,
+        "max_horizon", max_horizon, jax.default_backend(),
+    )
 
     """
     Setup agent
@@ -237,10 +237,12 @@ def main(cfg: DictConfig):
         # Eval
         if grad_steps // eval_every_grad_step > eval_times:
             eval_times = grad_steps // eval_every_grad_step
-            eval_key, real_key = random.split(eval_key, 2)
-            real_rollouts, real_metrics = evaluator(
-                eqx.nn.inference_mode(pi_network), deterministic=True, key=real_key
-            )
+            real_rollouts, real_metrics = [], {}
+            if evaluator is not None:
+                eval_key, real_key = random.split(eval_key, 2)
+                real_rollouts, real_metrics = evaluator(
+                    eqx.nn.inference_mode(pi_network), deterministic=True, key=real_key
+                )
             to_log = {
                 "count/eval_times": eval_times,
                 "count/env_step": env_steps,

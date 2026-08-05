@@ -281,12 +281,13 @@ class LearnedContEnv:
         unc_quantile: float,  # in [0,1], while -1 means not using unc truncation
         unc_type: str = "epi_mean",
         max_rollout_len: int = -1,  # -1 means not using max rollout length
+        dataset_path: str = None,
         **kwargs,
     ):
         """
         Called by the main script as initialization.
         """
-        original_env = make_env(domain, dataset_name)
+        original_env = make_env(domain, dataset_name, dataset_path=dataset_path)
         # these quantities are known to the agent
         self.max_horizon = original_env._max_episode_steps
         self.state_dim = original_env.observation_space.shape[0]
@@ -295,8 +296,19 @@ class LearnedContEnv:
         ## 1. load the model
         model_dir = os.path.join(save_dir, dataset_name)
         all_paths = sorted(glob.glob(os.path.join(model_dir, f"ensemble_seed*.eqx")))
-        seed = model_seed % len(all_paths)
-        model_path = all_paths[seed]
+        exact_path = os.path.join(model_dir, f"ensemble_seed{model_seed}.eqx")
+        if os.path.isfile(exact_path):
+            model_path = exact_path
+            seed = model_seed
+        elif all_paths:
+            seed = model_seed % len(all_paths)
+            model_path = all_paths[seed]
+            print(
+                f"Warning: exact checkpoint for seed {model_seed} not found; "
+                f"falling back to {model_path}"
+            )
+        else:
+            raise FileNotFoundError(f"No ensemble_seed*.eqx checkpoints found in {model_dir}")
         self.plot_dir = os.path.join(
             plot_dir,
             dataset_name,

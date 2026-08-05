@@ -1,0 +1,81 @@
+defaults:
+  - _self_
+  - task: placeholder
+  - override /hydra/hydra_logging@_group_: none
+  - override /hydra/job_logging@_group_: none
+
+domain: go2
+dataset_name: Go2JoystickFlatTerrain-direction-expert-v1
+dataset_path: datasets/Go2JoystickFlatTerrain-direction-expert-v1/data/main_data.hdf5
+seed: 0
+debug: false
+save_agent: true
+save_agent_root: offline_agent/ckpt
+load_agent_path: null
+wandb_project: neubay-go2-agent
+
+ensemble:
+  domain: go2
+  save_dir: offline_world/ckpt/wm_trained/go2
+  plot_dir: plt/go2
+  total_size: 128
+  hidden_size: 200
+  has_ln: true
+  total_epochs: null
+  max_epochs_since_update: 5
+  improve_thres: 0.01
+  batch_size: 256
+  lr: 0.001
+  weight_decay: 0.00005
+
+eval:
+  enabled: false
+  times: 100
+  real_episodes: 0
+
+collect:
+  dataset_path: ${dataset_path}
+  ensemble_size: 100
+  parallel_size: 100
+  penalty_coef: 0.0
+  unc_type: epi_mean
+  unc_quantile: 1.0
+  max_rollout_len: -1
+
+train:
+  grad_steps: 2_000_000
+  batch_size: 2_048
+  buffer_size: 40_000_000
+  utd: 0.05
+  real_weight: 0.05
+  critic_enc_lr: 1e-5
+  critic_head_lr: 1e-4
+  actor_enc_lr: 1e-5
+  actor_head_lr: 1e-4
+  critic_lr_ratio: 1.0
+  actor_lr_ratio: 0.0
+  alpha_lr: 1e-4
+  weight_decay: 0.0
+  gamma: 0.99
+  target_tau: 0.005
+  adam_eps: 1.0e-8
+  gradient_scale: 1000.0
+
+model:
+  memory:
+    d_model: 256
+    d_hidden: 128
+    n_layers: 2
+    r_min: 0.0
+    r_max: 0.9
+  head_d_hidden: 256
+  head_n_layers: 2
+  num_critics: 10
+  sampled_critics: 2
+  target_alpha_ratio: 1.0
+  init_alpha: 0.2
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

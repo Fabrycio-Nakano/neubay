@@ -1,3 +1,6 @@
+import json
+from pathlib import Path
+
 import numpy as np
 import gym, d4rl, neorl
 from gym import spaces
@@ -6,8 +9,102 @@ from gym.core import ActType, ObsType
 from typing import Tuple
 
 
-def make_env(domain: str, dataset_name: str):
-    if "neorl" in domain:
+class HDF5OfflineEnv(gym.Env):
+    """Minimal Gym metadata/dataset adapter for Minari-style HDF5 datasets."""
+
+    def __init__(self, dataset_name: str, dataset_path: str = None):
+        self.dataset_name = dataset_name
+        self.dataset_path = self._resolve_dataset_path(dataset_name, dataset_path)
+        metadata_path = self.dataset_path.parent / "metadata.json"
+        metadata = json.loads(metadata_path.read_text()) if metadata_path.is_file() else {}
+
+        obs_shape = self._metadata_shape(metadata.get("observation_space"))
+        act_shape = self._metadata_shape(metadata.get("action_space"))
+        if obs_shape is None or act_shape is None:
+            import h5py
+
+            with h5py.File(self.dataset_path, "r") as handle:
+                first_episode = sorted(
+                    handle.keys(), key=lambda name: int(name.split("_")[-1])
+                )[0]
+                obs_shape = tuple(handle[first_episode]["observations"].shape[1:])
+                act_shape = tuple(handle[first_episode]["actions"].shape[1:])
+
+        self.observation_space = spaces.Box(
+            low=-np.inf, high=np.inf, shape=obs_shape, dtype=np.float32
+        )
+        self.action_space = spaces.Box(
+            low=-1.0, high=1.0, shape=act_shape, dtype=np.float32
+        )
+        self._max_episode_steps = 1000
+        self.max_episode_steps = self._max_episode_steps
+        self._dataset = None
+
+    @staticmethod
+    def _metadata_shape(value):
+        if not value:
+            return None
+        parsed = json.loads(value) if isinstance(value, str) else value
+        return tuple(parsed["shape"])
+
+    @staticmethod
+    def _resolve_dataset_path(dataset_name, dataset_path):
+        if dataset_path:
+            candidate = Path(dataset_path).expanduser()
+            if candidate.is_file():
+                return candidate.resolve()
+        candidates = [
+            Path("datasets") / dataset_name / "data" / "main_data.hdf5",
+            Path("datasets/akcit-rl_playground_backup")
+            / dataset_name
+            / "data"
+            / "main_data.hdf5",
+        ]
+        for candidate in candidates:
+            if candidate.is_file():
+                return candidate.resolve()
+        raise FileNotFoundError(
+            "Go2 HDF5 dataset not found. Set dataset_path in configs/go2/base.yaml."
+        )
+
+    def get_dataset(self, **kwargs):
+        if self._dataset is not None:
+            return self._dataset
+
+        import h5py
+
+        chunks = {key: [] for key in [
+            "observations", "actions", "next_observations", "rewards",
+            "terminals", "timeouts"
+        ]}
+        with h5py.File(self.dataset_path, "r") as handle:
+            episode_names = sorted(
+                handle.keys(), key=lambda name: int(name.split("_")[-1])
+            )
+            for episode_name in episode_names:
+                episode = handle[episode_name]
+                observations = np.asarray(episode["observations"], dtype=np.float32)
+                chunks["observations"].append(observations[:-1])
+                chunks["next_observations"].append(observations[1:])
+                chunks["actions"].append(np.asarray(episode["actions"], dtype=np.float32))
+                chunks["rewards"].append(np.asarray(episode["rewards"], dtype=np.float32))
+                chunks["terminals"].append(
+                    np.asarray(episode["terminations"]).astype(bool)
+                )
+                chunks["timeouts"].append(
+                    np.asarray(episode["truncations"]).astype(bool)
+                )
+
+        self._dataset = {
+            key: np.concatenate(parts, axis=0) for key, parts in chunks.items()
+        }
+        return self._dataset
+
+
+def make_env(domain: str, dataset_name: str, dataset_path: str = None):
+    if "go2" in domain.lower():
+        env = HDF5OfflineEnv(dataset_name, dataset_path=dataset_path)
+    elif "neorl" in domain:
         env = neorl.make(dataset_name)
     elif "antmaze" in domain:
         env = AntMazeWrapper(gym.make(dataset_name))
