@@ -1,0 +1,37 @@
+{
+  "args": {
+    "domain": "go2",
+    "dataset_name": "Go2JoystickFlatTerrain-direction-expert-v1",
+    "hdf5_dataset": "datasets/Go2JoystickFlatTerrain-direction-expert-v1/data/main_data.hdf5",
+    "checkpoint_dir": "offline_world/ckpt/wm_trained/go2/Go2JoystickFlatTerrain-direction-expert-v1",
+    "checkpoint_path": null,
+    "model_seed": 0,
+    "sample_size": 10000,
+    "random_state": 42,
+    "aggregate": "member",
+    "member_index": 0,
+    "batch_size": 4096,
+    "ridge_alpha": 1.0,
+    "skip_mlp": false,
+    "random_model_if_missing": false,
+    "random_ensemble_size": 4,
+    "random_hidden_size": 200,
+    "goal_x": null,
+    "goal_y": null,
+    "output_dir": "/workspace/papers/probe_outputs"
+  },
+  "root": "/workspace",
+  "checkpoint": "offline_world/ckpt/wm_trained/go2/Go2JoystickFlatTerrain-direction-expert-v1/ensemble_seed0.eqx",
+  "hparams": {
+    "ensemble_size": 128,
+    "hidden_size": 200,
+    "has_ln": true
+  },
+  "num_transitions_total": 1001007,
+  "num_transitions_used": 10000,
+  "outputs": {
+    "probe_results": "/workspace/papers/probe_outputs/go2__Go2JoystickFlatTerrain-direction-expert-v1__seed0__member__probe_results.csv",
+    "diagnostic_probe_results": "/workspace/papers/probe_outputs/go2__Go2JoystickFlatTerrain-direction-expert-v1__seed0__member__diagnostic_probe_results.csv",
+    "controls": "/workspace/papers/probe_outputs/go2__Go2JoystickFlatTerrain-direction-expert-v1__seed0__member__controls.csv"
+  }
+}

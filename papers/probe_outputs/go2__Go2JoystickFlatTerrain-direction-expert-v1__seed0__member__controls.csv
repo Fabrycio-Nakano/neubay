@@ -1,0 +1,4 @@
+domain,dataset_name,target,control,ridge_r2,ridge_mae,ridge_rmse
+go2,Go2JoystickFlatTerrain-direction-expert-v1,delta_obs,input_obs_action,0.6220088005065918,0.30384519696235657,0.6871145208099934
+go2,Go2JoystickFlatTerrain-direction-expert-v1,delta_obs,labels_shuffled,-0.00972155760973692,0.5569004416465759,1.5121972561336467
+go2,Go2JoystickFlatTerrain-direction-expert-v1,delta_obs,random_features,-0.027715876698493958,0.5677075386047363,1.5585426570768677

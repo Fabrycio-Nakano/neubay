@@ -44,3 +44,8 @@ runs/
 outputs/
 
 password_ovx.txt
+
+# Papers: versionar código, notebooks e resultados leves; ignorar fontes binárias/cache
+papers/*.pdf
+papers/*.pdf:Zone.Identifier
+papers/__pycache__/
