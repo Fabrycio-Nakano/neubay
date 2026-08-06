@@ -34,6 +34,7 @@ CONTAINER_HOME="/home/${USER}"
 WRITABLE_MUJOCO_PY="${CACHE_DIR}/mujoco_py_pkg"
 DATASET="${REPO_DIR}/datasets/Go2JoystickFlatTerrain-direction-expert-v1/data/main_data.hdf5"
 CHECKPOINT="${REPO_DIR}/offline_world/ckpt/wm_trained/go2/Go2JoystickFlatTerrain-direction-expert-v1/ensemble_seed${SEED}.eqx"
+DATASET_NAME="Go2JoystickFlatTerrain-direction-expert-v1"
 
 mkdir -p "${LOG_DIR}" "${WANDB_DIR}" "${CACHE_DIR}/home"
 test -f "${CONTAINER}" || { echo "[ERROR] Container not found: ${CONTAINER}"; exit 1; }
@@ -59,15 +60,30 @@ export APPTAINERENV_MUJOCO_GL="osmesa"
 export APPTAINERENV_PYOPENGL_PLATFORM="osmesa"
 
 EXTRA_OVERRIDES=""
+RUN_KIND="full"
+WANDB_JOB_TYPE="world-model-agent-training"
 if [ "${SMOKE_TEST:-false}" = "true" ]; then
     EXTRA_OVERRIDES="train.grad_steps=2000 eval.times=2 train.buffer_size=200000 collect.parallel_size=100 collect.max_rollout_len=10"
+    RUN_KIND="smoke"
+    WANDB_JOB_TYPE="smoke-test"
 fi
+
+if [ "${RUN_KIND}" = "smoke" ]; then
+    RUN_NAME="SMOKE-NEUBAY-${DATASET_NAME}-S${SEED}-J${SLURM_ARRAY_JOB_ID}"
+else
+    RUN_NAME="NEUBAY-${DATASET_NAME}-S${SEED}"
+fi
+RUN_ID="${RUN_NAME}-J${SLURM_ARRAY_JOB_ID}"
 
 echo "============================================"
 echo "Job:        ${SLURM_JOB_ID} (${SLURM_ARRAY_JOB_ID}[${SEED}])"
 echo "Dataset:    ${DATASET}"
 echo "Checkpoint: ${CHECKPOINT}"
 echo "Smoke test: ${SMOKE_TEST:-false}"
+echo "W&B project: neubay-official-results"
+echo "W&B group:   ${DATASET_NAME}"
+echo "W&B run:     ${RUN_NAME}"
+echo "W&B run ID:  ${RUN_ID}"
 echo "============================================"
 
 apptainer exec \
@@ -90,5 +106,9 @@ apptainer exec \
             task=go2_joystick \
             seed=${SEED} \
             dataset_path=${DATASET} \
+            exp_name=${RUN_NAME} \
+            wandb_run_id=${RUN_ID} \
+            wandb_job_type=${WANDB_JOB_TYPE} \
+            wandb_tags=[go2,joystick,world-model-agent,${RUN_KIND}] \
             ${EXTRA_OVERRIDES}
     "

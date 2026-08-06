@@ -75,12 +75,25 @@ def main(cfg: DictConfig):
     name = datetime.now().strftime("%m-%d-%H-%M-%S")
     name += f'-{config["seed"]}'
     run_name = config.get("exp_name", name)
-    wandb.init(
+    wandb_kwargs = dict(
         project=config.get("wandb_project", "neubay-reproduction"),
         name=run_name,
         config=config,
-	reinit=True
+        reinit=True,
     )
+    for config_key, wandb_key in [
+        ("wandb_entity", "entity"),
+        ("wandb_group", "group"),
+        ("wandb_job_type", "job_type"),
+        ("wandb_run_id", "id"),
+        ("wandb_tags", "tags"),
+    ]:
+        value = config.get(config_key)
+        if value:
+            wandb_kwargs[wandb_key] = value
+    if wandb_kwargs.get("id"):
+        wandb_kwargs["resume"] = "allow"
+    wandb.init(**wandb_kwargs)
 
     """Setup optional real-environment evaluation."""
     key = random.PRNGKey(config["seed"])

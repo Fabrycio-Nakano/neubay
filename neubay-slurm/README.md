@@ -130,8 +130,10 @@ sbatch neubay-slurm/run_agent_go2.sh
 ```
 
 Os agentes são salvos em
-`offline_agent/ckpt/go2/Go2JoystickFlatTerrain-direction-expert-v1/` e as runs
-são registradas no projeto W&B `neubay-go2-agent`.
+`offline_agent/ckpt/go2/Go2JoystickFlatTerrain-direction-expert-v1/`. As runs
+são registradas no projeto W&B `neubay-official-results`, agrupadas por dataset,
+com nomes `NEUBAY-Go2JoystickFlatTerrain-direction-expert-v1-S<seed>`. Smoke
+tests recebem o prefixo `SMOKE-` e o ID do job SLURM.
 
 ---
 

@@ -12,7 +12,16 @@ debug: false
 save_agent: true
 save_agent_root: offline_agent/ckpt
 load_agent_path: null
-wandb_project: neubay-go2-agent
+exp_name: null
+wandb_entity: flnalmada-ufg
+wandb_project: neubay-official-results
+wandb_group: Go2JoystickFlatTerrain-direction-expert-v1
+wandb_job_type: world-model-agent-training
+wandb_run_id: null
+wandb_tags:
+  - go2
+  - joystick
+  - world-model-agent
 
 ensemble:
   domain: go2
