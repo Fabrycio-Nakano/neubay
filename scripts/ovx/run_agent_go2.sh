@@ -1,13 +1,17 @@
 #!/bin/bash
 # =============================================================================
 # NEUBAY — Go2 Joystick agent training on pre-trained world models.
-# Seeds 0 and 2 match the checkpoints validated by the representation probes.
+# O dataset é informado no primeiro argumento; o padrão preserva o experimento
+# expert original. Use --array=0-2 no retreino medium.
 #
 # Full run:
-#   sbatch neubay-slurm/run_agent_go2.sh
+#   sbatch scripts/ovx/run_agent_go2.sh
+# Medium, seeds 0, 1 e 2:
+#   sbatch --array=0-2 scripts/ovx/run_agent_go2.sh \
+#     Go2JoystickFlatTerrain-direction-medium-replay-v0
 # Smoke test:
 #   sbatch --array=0 --time=01:00:00 --export=ALL,SMOKE_TEST=true \
-#     neubay-slurm/run_agent_go2.sh
+#     scripts/ovx/run_agent_go2.sh
 # =============================================================================
 
 #SBATCH --job-name=neubay_go2_agent
@@ -23,6 +27,8 @@
 
 set -euo pipefail
 
+DATASET_NAME="${1:-Go2JoystickFlatTerrain-direction-expert-v1}"
+
 SEED="${SLURM_ARRAY_TASK_ID}"
 RAID_BASE="/raid/${USER}/neubay"
 REPO_DIR="${RAID_BASE}"
@@ -32,9 +38,8 @@ LOG_DIR="${RAID_BASE}/logs"
 CACHE_DIR="${RAID_BASE}/.cache"
 CONTAINER_HOME="/home/${USER}"
 WRITABLE_MUJOCO_PY="${CACHE_DIR}/mujoco_py_pkg"
-DATASET="${REPO_DIR}/datasets/Go2JoystickFlatTerrain-direction-expert-v1/data/main_data.hdf5"
-CHECKPOINT="${REPO_DIR}/offline_world/ckpt/wm_trained/go2/Go2JoystickFlatTerrain-direction-expert-v1/ensemble_seed${SEED}.eqx"
-DATASET_NAME="Go2JoystickFlatTerrain-direction-expert-v1"
+DATASET="${REPO_DIR}/datasets/${DATASET_NAME}/data/main_data.hdf5"
+CHECKPOINT="${REPO_DIR}/offline_world/ckpt/wm_trained/go2/${DATASET_NAME}/ensemble_seed${SEED}.eqx"
 
 mkdir -p "${LOG_DIR}" "${WANDB_DIR}" "${CACHE_DIR}/home"
 test -f "${CONTAINER}" || { echo "[ERROR] Container not found: ${CONTAINER}"; exit 1; }
@@ -105,6 +110,8 @@ apptainer exec \
             --config-name=base \
             task=go2_joystick \
             seed=${SEED} \
+            dataset_name=${DATASET_NAME} \
+            wandb_group=${DATASET_NAME} \
             dataset_path=${DATASET} \
             exp_name=${RUN_NAME} \
             wandb_run_id=${RUN_ID} \

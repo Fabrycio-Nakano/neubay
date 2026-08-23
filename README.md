@@ -76,6 +76,10 @@ After downloading, place the folder under `offline_world/ckpt`. For each dataset
 
 ## File structure
 - `configs`: configurations for each benchmark and dataset
+- `scripts/ovx`: extensões para execução reproduzível com SLURM e Apptainer na OVX
+- `scripts/local`: avaliação local e geração de vídeos do Go2
+- `docs/study`: protocolo e escopo do estudo RoboWM 2026
+- `docs/audits`: relatórios de auditoria dos experimentos Go2
 - `experience`: [tape-based](https://arxiv.org/abs/2402.09900) replay buffer (`agent_buffer.py`), planner (`collector.py`), evaluation on the true MDP (`evaluator.py`), offline data storage for world modeling and history sampling (`world_buffer.py`)
 - `memory`: [linear recurrent unit](https://arxiv.org/abs/2303.06349) adapted from [Memoroids](https://arxiv.org/abs/2402.09900)
 - `neorl`: adapted from [NeoRL codebase](https://github.com/polixir/NeoRL), included directly to avoid installation
@@ -197,4 +201,3 @@ python plot_ln.py --train_dataset halfcheetah-random-v2 --eval_dataset medium-re
 ## Questions?
 
 Please open an issue for technical problems or send an email to Tianwei (twni2016@gmail.com) for questions about the paper.
-

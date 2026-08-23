@@ -96,6 +96,7 @@ class LearnedContEnv:
         seed: int,
         save_dir: str,
         plot_dir: str,
+        dataset_path: str = None,
         total_size: int = 128,
         hidden_size: int = 200,  # 4 hidden layers of this size
         has_ln: bool = True,  # layernorm in model
@@ -111,7 +112,7 @@ class LearnedContEnv:
         """
         cfg = {k: v for k, v in locals().items() if k != "self"}  # current arguments
 
-        original_env = make_env(domain, dataset_name)
+        original_env = make_env(domain, dataset_name, dataset_path=dataset_path)
         # these quantities are known to the agent
         self.state_dim = original_env.observation_space.shape[0]
         self.act_dim = original_env.action_space.shape[0]
@@ -481,6 +482,7 @@ def main(cfg: DictConfig):
     # ----------- train the model
     world.train_model(
         dataset_name=config["dataset_name"],
+        dataset_path=config.get("dataset_path"),
         seed=config["seed"],
         **config["ensemble"],
     )

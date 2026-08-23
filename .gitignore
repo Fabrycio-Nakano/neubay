@@ -34,14 +34,22 @@ logs/
 .env
 wandb.env
 .venv/
+.venv-*/
 venv/
 
 # Checkpoints / datasets / artefatos grandes
 checkpoints/
 datasets/
+offline_agent/ckpt/
+external/
+Go2JoystickFlatTerrain-direction-*/
+*.tar.gz
 wandb/
 runs/
 outputs/
+
+# Vídeos completos são artefatos locais; publique apenas uma seleção curada
+videos/
 
 password_ovx.txt
 

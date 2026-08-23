@@ -7,10 +7,12 @@ Guia completo para reproduzir os experimentos do NEUBAY na OVX usando **SLURM + 
 ## Estrutura dos scripts
 
 ```
-slurm/
+scripts/ovx/
 ├── build_container.sh   # (1x) Constrói a imagem Apptainer .sif
-├── run_world_model.sh   # Treina o world model ensemble — PULE se usar ckpts pré-treinados
-└── run_agent.sh         # Treina o agente NEUBAY sobre o world model
+├── run_world_model.sh   # Treina o world model ensemble
+├── run_world_model_go2.sh # Treina world model Go2 com dataset explícito
+├── run_agent.sh         # Treina agentes dos benchmarks originais
+└── run_agent_go2.sh     # Treina o agente Go2 a partir de HDF5
 ```
 
 ---
@@ -23,12 +25,12 @@ Execute **uma vez** no login node para preparar o ambiente no raid:
 RAID_BASE="/raid/${USER}/neubay"
 mkdir -p "${RAID_BASE}/logs"
 
-# 1. Copie o repositório para o raid (se ainda não estiver lá)
-cp -r /caminho/para/neubay-main "${RAID_BASE}/"
+# 1. Clone o repositório no raid (se ainda não estiver lá)
+git clone <URL_DO_REPOSITORIO> "${RAID_BASE}"
 
 # 2. Copie os checkpoints pré-treinados para o lugar certo
 # Estrutura esperada: offline_world/ckpt/<domínio>/<dataset>/<seed>/
-cp -r /caminho/para/ckpts_pretreinados "${RAID_BASE}/neubay-main/offline_world/ckpt"
+cp -r /caminho/para/ckpts_pretreinados "${RAID_BASE}/offline_world/ckpt"
 
 # 3. Baixe os datasets D4RL (necessário mesmo com ckpts pré-treinados)
 #    Use um job de CPU curto para isso:
@@ -37,8 +39,8 @@ sbatch --job-name=get_data --nodes=1 --ntasks=1 --cpus-per-task=4 \
        --output="${RAID_BASE}/logs/get_data_%j.out" \
        --wrap="apptainer exec --nv --bind ${RAID_BASE}:${RAID_BASE} \
                ${RAID_BASE}/neubay.sif bash -c \
-               'export PYTHONPATH=${RAID_BASE}/neubay-main:\$PYTHONPATH && \
-                cd ${RAID_BASE}/neubay-main && python get_all_datasets.py'"
+               'export PYTHONPATH=${RAID_BASE}:\$PYTHONPATH && \
+                cd ${RAID_BASE} && python get_all_datasets.py'"
 ```
 
 ---
@@ -46,7 +48,7 @@ sbatch --job-name=get_data --nodes=1 --ntasks=1 --cpus-per-task=4 \
 ## Passo 0 — Build do container (apenas uma vez)
 
 ```bash
-sbatch slurm/build_container.sh
+sbatch scripts/ovx/build_container.sh
 # Aguarde ~1h. O .sif será salvo em /raid/<user>/neubay/neubay.sif
 squeue -u $USER  # acompanhe o progresso
 ```
@@ -62,49 +64,49 @@ Como os checkpoints de world model já estão disponíveis, **pule o Passo 1b** 
 ### D4RL Locomotion
 
 ```bash
-sbatch slurm/run_agent.sh d4rl_loco halfcheetah_medium_expert
-sbatch slurm/run_agent.sh d4rl_loco halfcheetah_medium
-sbatch slurm/run_agent.sh d4rl_loco halfcheetah_medium_replay
-sbatch slurm/run_agent.sh d4rl_loco halfcheetah_random
-sbatch slurm/run_agent.sh d4rl_loco hopper_medium
-sbatch slurm/run_agent.sh d4rl_loco hopper_medium_expert
-sbatch slurm/run_agent.sh d4rl_loco hopper_medium_replay
-sbatch slurm/run_agent.sh d4rl_loco hopper_random
-sbatch slurm/run_agent.sh d4rl_loco walker2d_medium
-sbatch slurm/run_agent.sh d4rl_loco walker2d_medium_expert
-sbatch slurm/run_agent.sh d4rl_loco walker2d_medium_replay
-sbatch slurm/run_agent.sh d4rl_loco walker2d_random
+sbatch scripts/ovx/run_agent.sh d4rl_loco halfcheetah_medium_expert
+sbatch scripts/ovx/run_agent.sh d4rl_loco halfcheetah_medium
+sbatch scripts/ovx/run_agent.sh d4rl_loco halfcheetah_medium_replay
+sbatch scripts/ovx/run_agent.sh d4rl_loco halfcheetah_random
+sbatch scripts/ovx/run_agent.sh d4rl_loco hopper_medium
+sbatch scripts/ovx/run_agent.sh d4rl_loco hopper_medium_expert
+sbatch scripts/ovx/run_agent.sh d4rl_loco hopper_medium_replay
+sbatch scripts/ovx/run_agent.sh d4rl_loco hopper_random
+sbatch scripts/ovx/run_agent.sh d4rl_loco walker2d_medium
+sbatch scripts/ovx/run_agent.sh d4rl_loco walker2d_medium_expert
+sbatch scripts/ovx/run_agent.sh d4rl_loco walker2d_medium_replay
+sbatch scripts/ovx/run_agent.sh d4rl_loco walker2d_random
 ```
 
 ### NeoRL Locomotion
 
 ```bash
-sbatch slurm/run_agent.sh neorl HalfCheetah_v3_low
-sbatch slurm/run_agent.sh neorl HalfCheetah_v3_medium
-sbatch slurm/run_agent.sh neorl HalfCheetah_v3_high
-sbatch slurm/run_agent.sh neorl Hopper_v3_low
-sbatch slurm/run_agent.sh neorl Hopper_v3_medium
-sbatch slurm/run_agent.sh neorl Hopper_v3_high
-sbatch slurm/run_agent.sh neorl Walker2d_v3_low
-sbatch slurm/run_agent.sh neorl Walker2d_v3_medium
-sbatch slurm/run_agent.sh neorl Walker2d_v3_high
+sbatch scripts/ovx/run_agent.sh neorl HalfCheetah_v3_low
+sbatch scripts/ovx/run_agent.sh neorl HalfCheetah_v3_medium
+sbatch scripts/ovx/run_agent.sh neorl HalfCheetah_v3_high
+sbatch scripts/ovx/run_agent.sh neorl Hopper_v3_low
+sbatch scripts/ovx/run_agent.sh neorl Hopper_v3_medium
+sbatch scripts/ovx/run_agent.sh neorl Hopper_v3_high
+sbatch scripts/ovx/run_agent.sh neorl Walker2d_v3_low
+sbatch scripts/ovx/run_agent.sh neorl Walker2d_v3_medium
+sbatch scripts/ovx/run_agent.sh neorl Walker2d_v3_high
 ```
 
 ### Adroit
 
 ```bash
-sbatch slurm/run_agent.sh adroit pen_human
-sbatch slurm/run_agent.sh adroit pen_cloned
-sbatch slurm/run_agent.sh adroit hammer_cloned
+sbatch scripts/ovx/run_agent.sh adroit pen_human
+sbatch scripts/ovx/run_agent.sh adroit pen_cloned
+sbatch scripts/ovx/run_agent.sh adroit hammer_cloned
 ```
 
 ### AntMaze
 
 ```bash
-sbatch slurm/run_agent.sh antmaze umaze
-sbatch slurm/run_agent.sh antmaze umaze_diverse
-sbatch slurm/run_agent.sh antmaze medium_diverse
-sbatch slurm/run_agent.sh antmaze medium_play
+sbatch scripts/ovx/run_agent.sh antmaze umaze
+sbatch scripts/ovx/run_agent.sh antmaze umaze_diverse
+sbatch scripts/ovx/run_agent.sh antmaze medium_diverse
+sbatch scripts/ovx/run_agent.sh antmaze medium_play
 ```
 
 Cada `sbatch` dispara **3 seeds simultaneamente** como array job. Os logs ficam em `/raid/<user>/neubay/logs/`.
@@ -120,14 +122,28 @@ Antes do treino completo, rode uma seed curta:
 
 ```bash
 sbatch --array=0 --time=01:00:00 --export=ALL,SMOKE_TEST=true \
-  neubay-slurm/run_agent_go2.sh
+  scripts/ovx/run_agent_go2.sh
 ```
 
 Depois que o smoke test salvar um agente sem erros, rode as seeds validadas pelos probes:
 
 ```bash
-sbatch neubay-slurm/run_agent_go2.sh
+sbatch scripts/ovx/run_agent_go2.sh
 ```
+
+Para o dataset medium, treine primeiro os três world models e, somente depois
+que todos terminarem com sucesso, treine os agentes:
+
+```bash
+DATASET_NAME=Go2JoystickFlatTerrain-direction-medium-replay-v0
+sbatch --array=0-2 scripts/ovx/run_world_model_go2.sh "${DATASET_NAME}"
+
+# Execute após confirmar os três checkpoints novos:
+sbatch --array=0-2 scripts/ovx/run_agent_go2.sh "${DATASET_NAME}"
+```
+
+O log do world model registra o caminho absoluto e o SHA-256 do HDF5 usado.
+Não reutilize os checkpoints medium anteriores à correção de `dataset_path`.
 
 Os agentes são salvos em
 `offline_agent/ckpt/go2/Go2JoystickFlatTerrain-direction-expert-v1/`. As runs
@@ -143,21 +159,21 @@ Só necessário se **não** estiver usando os checkpoints pré-treinados.
 
 ```bash
 # D4RL Locomotion
-sbatch slurm/run_world_model.sh d4rl_loco hopper-random-v2 1200
-sbatch slurm/run_world_model.sh d4rl_loco halfcheetah-medium-replay-v2
-sbatch slurm/run_world_model.sh d4rl_loco walker2d-medium-v2 1200
-sbatch slurm/run_world_model.sh d4rl_loco halfcheetah-medium-expert-v2 600
+sbatch scripts/ovx/run_world_model.sh d4rl_loco hopper-random-v2 1200
+sbatch scripts/ovx/run_world_model.sh d4rl_loco halfcheetah-medium-replay-v2
+sbatch scripts/ovx/run_world_model.sh d4rl_loco walker2d-medium-v2 1200
+sbatch scripts/ovx/run_world_model.sh d4rl_loco halfcheetah-medium-expert-v2 600
 
 # NeoRL
-sbatch slurm/run_world_model.sh neorl Hopper-v3-low 1200
+sbatch scripts/ovx/run_world_model.sh neorl Hopper-v3-low 1200
 
 # Adroit
-sbatch slurm/run_world_model.sh adroit pen-human-v1
-sbatch slurm/run_world_model.sh adroit pen-cloned-v1 2400
-sbatch slurm/run_world_model.sh adroit hammer-cloned-v1 1200
+sbatch scripts/ovx/run_world_model.sh adroit pen-human-v1
+sbatch scripts/ovx/run_world_model.sh adroit pen-cloned-v1 2400
+sbatch scripts/ovx/run_world_model.sh adroit hammer-cloned-v1 1200
 
 # AntMaze
-sbatch slurm/run_world_model.sh antmaze antmaze-umaze-v2 1200
+sbatch scripts/ovx/run_world_model.sh antmaze antmaze-umaze-v2 1200
 ```
 
 ---
