@@ -43,9 +43,7 @@ if [ -d "/home/${USER}/.config/wandb" ]; then
     mkdir -p "${CACHE_DIR}/home/.config"
     cp -r "/home/${USER}/.config/wandb" "${CACHE_DIR}/home/.config/"
 fi
-if [ -f "${REPO_DIR}/wandb.env" ]; then
-    source "${REPO_DIR}/wandb.env"
-fi
+source "${REPO_DIR}/scripts/ovx/load_wandb_env.sh"
 
 DATASET_SHA256="$(sha256sum "${DATASET}" | cut -d' ' -f1)"
 CHECKPOINT_DIR="${REPO_DIR}/offline_world/ckpt/wm_trained/go2/${DATASET_NAME}"

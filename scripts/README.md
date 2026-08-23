@@ -13,6 +13,12 @@ Os scripts da raiz (`submit_neubay.sh`, `submit_world_model.sh` e arquivos
 prefira `ovx/run_world_model_go2.sh` e `ovx/run_agent_go2.sh`. Eles recebem o
 nome do dataset explicitamente e mantêm datasets e checkpoints separados.
 
+## Credenciais W&B
+
+Copie `wandb.env.example` para `wandb.env`, preencha com um token válido e use
+permissão `600`. `wandb.env` nunca deve ser versionado. Os lançadores da OVX
+carregam esse arquivo por meio de `ovx/load_wandb_env.sh`.
+
 ## Artefatos não versionados
 
 Datasets, checkpoints, contêineres, ambientes virtuais, logs W&B/SLURM e vídeos

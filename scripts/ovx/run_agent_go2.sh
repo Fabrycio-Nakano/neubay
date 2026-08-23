@@ -53,9 +53,7 @@ if [ -d "/home/${USER}/.config/wandb" ]; then
     mkdir -p "${CACHE_DIR}/home/.config"
     cp -r "/home/${USER}/.config/wandb" "${CACHE_DIR}/home/.config/"
 fi
-if [ -f "${REPO_DIR}/wandb.env" ]; then
-    source "${REPO_DIR}/wandb.env"
-fi
+source "${REPO_DIR}/scripts/ovx/load_wandb_env.sh"
 
 export APPTAINERENV_LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libstdc++.so.6"
 export APPTAINERENV_JAX_CUDA_P2P_DISABLE=1

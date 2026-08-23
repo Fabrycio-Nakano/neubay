@@ -53,14 +53,9 @@ export APPTAINERENV_MUJOCO_GL="osmesa"
 export APPTAINERENV_PYOPENGL_PLATFORM="osmesa"
 export APPTAINERENV_XLA_PYTHON_CLIENT_ALLOCATOR="platform"
 
-# Carrega as credenciais do WandB a partir do arquivo wandb.env
-if [ -f "$(dirname "$0")/wandb.env" ]; then
-    source "$(dirname "$0")/wandb.env"
-elif [ -f "${PROJECT_DIR}/wandb.env" ]; then
-    source "${PROJECT_DIR}/wandb.env"
-else
-    echo "[WARNING] wandb.env não encontrado!"
-fi
+# Carrega as credenciais locais sem incluí-las no repositório.
+REPO_DIR="${PROJECT_DIR}"
+source "${PROJECT_DIR}/scripts/ovx/load_wandb_env.sh"
 
 export APPTAINERENV_WANDB_PROJECT="${NEW_PROJECT}"
 export APPTAINERENV_WANDB_NAME="${CLEAN_NAME}"

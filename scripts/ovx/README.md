@@ -43,6 +43,15 @@ sbatch --job-name=get_data --nodes=1 --ntasks=1 --cpus-per-task=4 \
                 cd ${RAID_BASE} && python get_all_datasets.py'"
 ```
 
+Crie também a credencial local do W&B, sem adicioná-la ao Git:
+
+```bash
+cd "${RAID_BASE}"
+cp wandb.env.example wandb.env
+chmod 600 wandb.env
+# Edite wandb.env e informe o token novo.
+```
+
 ---
 
 ## Passo 0 — Build do container (apenas uma vez)

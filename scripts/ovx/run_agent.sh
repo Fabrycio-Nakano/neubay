@@ -51,14 +51,8 @@ if [ -d "/home/${USER}/.config/wandb" ]; then
     cp -r "/home/${USER}/.config/wandb" "${CACHE_DIR}/home/.config/"
 fi
 
-# Carrega as credenciais do WandB a partir do arquivo wandb.env
-if [ -f "$(dirname "$0")/../wandb.env" ]; then
-    source "$(dirname "$0")/../wandb.env"
-elif [ -f "${REPO_DIR}/wandb.env" ]; then
-    source "${REPO_DIR}/wandb.env"
-else
-    echo "[WARNING] wandb.env não encontrado!"
-fi
+# Carrega as credenciais locais sem incluí-las no repositório.
+source "${REPO_DIR}/scripts/ovx/load_wandb_env.sh"
 
 echo "============================================"
 echo "Job:      ${SLURM_JOB_ID} (array ${SLURM_ARRAY_JOB_ID}[${SLURM_ARRAY_TASK_ID}])"
