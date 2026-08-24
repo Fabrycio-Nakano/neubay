@@ -170,7 +170,9 @@ checkpoints completos.
 
 O manifesto `go2_datasets.tsv` contém as quatro variantes de
 `go2-joystick-direction` e as quatro de `go2-flat-forward`, com nome local,
-tamanho e SHA-256. Para baixar tudo de forma retomável e verificável:
+tamanho e SHA-256. O download é fixado na revisão auditada do Hugging Face
+`1ecf8436e64d30dbc2293b3b89211619acf8b39f`. Para baixar tudo de forma
+retomável e verificável:
 
 ```bash
 bash scripts/ovx/download_go2_datasets.sh
@@ -198,15 +200,20 @@ DRY_RUN=true RUN_BATCH_ID=go2-full8-dryrun \
 ```
 
 O submissor cria três seeds por dataset. Cada array de agentes usa uma
-dependência `afterok` do respectivo array de world models. Checkpoints ficam em
-diretórios versionados pelo lote, sem sobrescrever experimentos anteriores. O
-mapa de IDs SLURM é salvo em `logs/pipelines/<RUN_BATCH_ID>/jobs.tsv`.
+dependência `afterok` do respectivo array de world models. Antes da submissão,
+o próprio script valida tamanho e SHA-256 dos oito datasets. Checkpoints ficam
+em diretórios versionados pelo lote, com gravação atômica e sem sobrescrever
+experimentos anteriores. O mapa de IDs SLURM é salvo em
+`logs/pipelines/<RUN_BATCH_ID>/jobs.tsv`.
 
-Os agentes são salvos em
-`offline_agent/ckpt/go2/Go2JoystickFlatTerrain-direction-expert-v1/`. As runs
-são registradas no projeto W&B `neubay-official-results`, agrupadas por dataset,
-com nomes `NEUBAY-Go2JoystickFlatTerrain-direction-expert-v1-S<seed>`. Smoke
-tests recebem o prefixo `SMOKE-` e o ID do job SLURM.
+Neste pipeline, os world models são salvos em
+`offline_world/ckpt/experiments/<RUN_BATCH_ID>/go2/<dataset>/` e os agentes em
+`offline_agent/ckpt/experiments/<RUN_BATCH_ID>/go2/<dataset>/`. As runs são
+registradas em dois projetos W&B: `world_models_go2` para os modelos de mundo
+e `agents_go2` para as políticas. Dentro deles, as runs são agrupadas por
+dataset e usam nomes `WorldModel-<dataset>-S<seed>` e
+`NEUBAY-<dataset>-S<seed>`. Smoke tests recebem o prefixo `SMOKE-` e o ID do
+job SLURM.
 
 ---
 

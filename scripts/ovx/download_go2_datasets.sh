@@ -5,7 +5,8 @@ set -euo pipefail
 
 REPO_DIR="${REPO_DIR:-/raid/${USER}/neubay}"
 MANIFEST="${REPO_DIR}/scripts/ovx/go2_datasets.tsv"
-HF_BASE="https://huggingface.co/datasets/akcit-rl/playground/resolve/main"
+HF_REVISION="${HF_REVISION:-1ecf8436e64d30dbc2293b3b89211619acf8b39f}"
+HF_BASE="https://huggingface.co/datasets/akcit-rl/playground/resolve/${HF_REVISION}"
 
 command -v curl >/dev/null || { echo "[ERROR] curl não encontrado" >&2; exit 1; }
 command -v sha256sum >/dev/null || { echo "[ERROR] sha256sum não encontrado" >&2; exit 1; }
@@ -69,11 +70,11 @@ while IFS=$'\t' read -r family variant hf_path local_name expected_sha expected_
         curl -fL --retry 8 --retry-delay 10 -C - \
             -o "${partial_file}" \
             "${HF_BASE}/${hf_path}/data/main_data.hdf5?download=true"
-        mv "${partial_file}" "${dataset_file}"
-        actual_size="$(stat -c '%s' "${dataset_file}")"
-        actual_sha="$(sha256sum "${dataset_file}" | cut -d' ' -f1)"
+        actual_size="$(stat -c '%s' "${partial_file}")"
+        actual_sha="$(sha256sum "${partial_file}" | cut -d' ' -f1)"
         test "${actual_size}" = "${expected_size}" || { echo "[ERROR] Tamanho inválido" >&2; exit 1; }
         test "${actual_sha}" = "${expected_sha}" || { echo "[ERROR] SHA-256 inválido" >&2; exit 1; }
+        mv "${partial_file}" "${dataset_file}"
         echo "Download verificado: OK"
     fi
 

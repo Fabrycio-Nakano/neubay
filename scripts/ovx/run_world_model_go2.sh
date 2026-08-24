@@ -54,6 +54,10 @@ fi
 source "${REPO_DIR}/scripts/ovx/load_wandb_env.sh"
 
 DATASET_SHA256="$(sha256sum "${DATASET}" | cut -d' ' -f1)"
+if [ -n "${EXPECTED_DATASET_SHA256:-}" ] && [ "${DATASET_SHA256}" != "${EXPECTED_DATASET_SHA256}" ]; then
+    echo "[ERROR] Dataset SHA-256 diverge do manifesto" >&2
+    exit 1
+fi
 SAVE_DIR="${WORLD_MODEL_SAVE_DIR:-offline_world/ckpt/wm_trained/go2}"
 SMOKE_OVERRIDES=""
 if [ "${SMOKE_TEST}" = "true" ]; then
@@ -108,10 +112,12 @@ apptainer exec \
             --config-path=../configs/go2 \
             --config-name=base \
             dataset_name=${DATASET_NAME} \
+            wandb_project=world_models_go2 \
             wandb_group=${DATASET_NAME} \
             wandb_job_type=world-model-training \
             wandb_tags=[go2,${DATASET_FAMILY},world-model,${RUN_BATCH_ID}] \
             dataset_path=${DATASET} \
+            dataset_sha256=${DATASET_SHA256} \
             ensemble.save_dir=${SAVE_DIR} \
             seed=${SEED} \
             ${SMOKE_OVERRIDES} \

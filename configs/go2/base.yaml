@@ -7,6 +7,7 @@ defaults:
 domain: go2
 dataset_name: Go2JoystickFlatTerrain-direction-expert-v1
 dataset_path: datasets/Go2JoystickFlatTerrain-direction-expert-v1/data/main_data.hdf5
+dataset_sha256: null
 seed: 0
 debug: false
 save_agent: true
@@ -14,7 +15,7 @@ save_agent_root: offline_agent/ckpt
 load_agent_path: null
 exp_name: null
 wandb_entity: flnalmada-ufg
-wandb_project: neubay-official-results
+wandb_project: agents_go2
 wandb_group: Go2JoystickFlatTerrain-direction-expert-v1
 wandb_job_type: world-model-agent-training
 wandb_run_id: null

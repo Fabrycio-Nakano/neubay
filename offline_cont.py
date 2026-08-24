@@ -109,6 +109,7 @@ def main(cfg: DictConfig):
         save_dir=config["ensemble"]["save_dir"],
         plot_dir=config["ensemble"]["plot_dir"],
         model_seed=config["seed"],
+        dataset_sha256=config.get("dataset_sha256"),
         **config["collect"],
     )
     collector = ContCollector(train_envs)
@@ -351,8 +352,9 @@ def main(cfg: DictConfig):
         )
         os.makedirs(save_dir, exist_ok=True)
         save_path = os.path.join(save_dir, f"agent_seed{config['seed']}.eqx")
+        temporary_path = save_path + ".tmp"
 
-        with open(save_path, "wb") as f:
+        with open(temporary_path, "wb") as f:
             f.write((json.dumps(config) + "\n").encode())
             eqx.tree_serialise_leaves(
                 f,
@@ -363,7 +365,8 @@ def main(cfg: DictConfig):
                     "alpha": alpha,
                 },
             )
-            print(f"saved agent to {save_path}")
+        os.replace(temporary_path, save_path)
+        print(f"saved agent to {save_path}")
 
 
 if __name__ == "__main__":

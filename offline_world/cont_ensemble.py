@@ -97,6 +97,7 @@ class LearnedContEnv:
         save_dir: str,
         plot_dir: str,
         dataset_path: str = None,
+        dataset_sha256: str = None,
         wandb_entity: str = None,
         wandb_project: str = None,
         wandb_group: str = None,
@@ -274,17 +275,24 @@ class LearnedContEnv:
         save_dir = os.path.join(save_dir, dataset_name)
         os.makedirs(save_dir, exist_ok=True)
         save_path = os.path.join(save_dir, f"ensemble_seed{seed}.eqx")
-        with open(save_path, "wb") as f:
+        temporary_path = save_path + ".tmp"
+        with open(temporary_path, "wb") as f:
             hparam_str = json.dumps(
                 {
                     "ensemble_size": total_size,
                     "hidden_size": hidden_size,
                     "has_ln": has_ln,
+                    "domain": domain,
+                    "dataset_name": dataset_name,
+                    "dataset_path": dataset_path,
+                    "dataset_sha256": dataset_sha256,
+                    "seed": seed,
                 }
             )
             f.write((hparam_str + "\n").encode())
             eqx.tree_serialise_leaves(f, self.ensemble)
-            print(f"saved model to {save_path}")
+        os.replace(temporary_path, save_path)
+        print(f"saved model to {save_path}")
 
     def load_model_and_data(
         self,
@@ -299,6 +307,7 @@ class LearnedContEnv:
         unc_type: str = "epi_mean",
         max_rollout_len: int = -1,  # -1 means not using max rollout length
         dataset_path: str = None,
+        dataset_sha256: str = None,
         **kwargs,
     ):
         """
@@ -337,6 +346,18 @@ class LearnedContEnv:
 
         with open(model_path, "rb") as f:
             hparams = json.loads(f.readline().decode())
+            checkpoint_dataset = hparams.get("dataset_name")
+            checkpoint_sha256 = hparams.get("dataset_sha256")
+            if checkpoint_dataset and checkpoint_dataset != dataset_name:
+                raise ValueError(
+                    f"Checkpoint dataset mismatch: {checkpoint_dataset} != {dataset_name}"
+                )
+            if dataset_sha256 and checkpoint_sha256 and checkpoint_sha256 != dataset_sha256:
+                raise ValueError(
+                    f"Checkpoint SHA-256 mismatch: {checkpoint_sha256} != {dataset_sha256}"
+                )
+            if dataset_sha256 and not checkpoint_sha256:
+                print("Warning: legacy checkpoint has no dataset SHA-256 provenance")
             random_ensemble = EnsembleContModel(
                 ensemble_size=hparams["ensemble_size"],
                 obs_dim=self.state_dim,
@@ -499,6 +520,7 @@ def main(cfg: DictConfig):
     world.train_model(
         dataset_name=config["dataset_name"],
         dataset_path=config.get("dataset_path"),
+        dataset_sha256=config.get("dataset_sha256"),
         wandb_entity=config.get("wandb_entity"),
         wandb_project=config.get("wandb_project"),
         wandb_group=config.get("wandb_group"),
@@ -515,6 +537,7 @@ def main(cfg: DictConfig):
         dataset_name=config["dataset_name"],
         save_dir=config["ensemble"]["save_dir"],
         model_seed=config["seed"],
+        dataset_sha256=config.get("dataset_sha256"),
         **config["collect"],
     )
 

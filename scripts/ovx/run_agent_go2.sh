@@ -15,7 +15,7 @@
 # =============================================================================
 
 #SBATCH --job-name=neubay_go2_agent
-#SBATCH --array=0,2
+#SBATCH --array=0-2
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -54,6 +54,11 @@ mkdir -p "${LOG_DIR}" "${WANDB_DIR}" "${CACHE_DIR}/home"
 test -f "${CONTAINER}" || { echo "[ERROR] Container not found: ${CONTAINER}"; exit 1; }
 test -f "${DATASET}" || { echo "[ERROR] Dataset not found: ${DATASET}"; exit 1; }
 test -f "${CHECKPOINT}" || { echo "[ERROR] Checkpoint not found: ${CHECKPOINT}"; exit 1; }
+DATASET_SHA256="$(sha256sum "${DATASET}" | cut -d' ' -f1)"
+if [ -n "${EXPECTED_DATASET_SHA256:-}" ] && [ "${DATASET_SHA256}" != "${EXPECTED_DATASET_SHA256}" ]; then
+    echo "[ERROR] Dataset SHA-256 diverge do manifesto" >&2
+    exit 1
+fi
 
 if [ -f "/home/${USER}/.netrc" ]; then
     cp "/home/${USER}/.netrc" "${CACHE_DIR}/home/.netrc"
@@ -97,11 +102,12 @@ fi
 echo "============================================"
 echo "Job:        ${SLURM_JOB_ID} (${SLURM_ARRAY_JOB_ID}[${SEED}])"
 echo "Dataset:    ${DATASET}"
+echo "SHA256:     ${DATASET_SHA256}"
 echo "Checkpoint: ${CHECKPOINT}"
 echo "Agent path:  ${AGENT_PATH}"
 echo "Batch:       ${RUN_BATCH_ID}"
 echo "Smoke test: ${SMOKE_TEST:-false}"
-echo "W&B project: neubay-official-results"
+echo "W&B project: agents_go2"
 echo "W&B group:   ${DATASET_NAME}"
 echo "W&B run:     ${RUN_NAME}"
 echo "W&B run ID:  ${RUN_ID}"
@@ -128,6 +134,9 @@ apptainer exec \
             seed=${SEED} \
             save_agent_root=${AGENT_SAVE_ROOT} \
             dataset_name=${DATASET_NAME} \
+            dataset_sha256=${DATASET_SHA256} \
+            ensemble.save_dir=${WORLD_MODEL_SAVE_DIR} \
+            wandb_project=agents_go2 \
             wandb_group=${DATASET_NAME} \
             dataset_path=${DATASET} \
             exp_name=${RUN_NAME} \

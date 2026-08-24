@@ -48,6 +48,9 @@ wandb/
 runs/
 outputs/
 
+# Auditorias e validadores locais (não versionar)
+local_validation/
+
 # Vídeos completos são artefatos locais; publique apenas uma seleção curada
 videos/
 

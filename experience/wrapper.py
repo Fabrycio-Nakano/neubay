@@ -24,9 +24,13 @@ class HDF5OfflineEnv(gym.Env):
             import h5py
 
             with h5py.File(self.dataset_path, "r") as handle:
-                first_episode = sorted(
-                    handle.keys(), key=lambda name: int(name.split("_")[-1])
-                )[0]
+                episode_names = sorted(
+                    (name for name in handle.keys() if name.startswith("episode_")),
+                    key=lambda name: int(name.split("_")[-1]),
+                )
+                if not episode_names:
+                    raise ValueError(f"No episode_* groups found in {self.dataset_path}")
+                first_episode = episode_names[0]
                 obs_shape = tuple(handle[first_episode]["observations"].shape[1:])
                 act_shape = tuple(handle[first_episode]["actions"].shape[1:])
 
@@ -79,21 +83,40 @@ class HDF5OfflineEnv(gym.Env):
         ]}
         with h5py.File(self.dataset_path, "r") as handle:
             episode_names = sorted(
-                handle.keys(), key=lambda name: int(name.split("_")[-1])
+                (name for name in handle.keys() if name.startswith("episode_")),
+                key=lambda name: int(name.split("_")[-1]),
             )
+            if not episode_names:
+                raise ValueError(f"No episode_* groups found in {self.dataset_path}")
             for episode_name in episode_names:
                 episode = handle[episode_name]
                 observations = np.asarray(episode["observations"], dtype=np.float32)
+                actions = np.asarray(episode["actions"], dtype=np.float32)
+                rewards = np.asarray(episode["rewards"], dtype=np.float32)
+                terminals = np.asarray(episode["terminations"]).astype(bool)
+                timeouts = np.asarray(episode["truncations"]).astype(bool)
+                transition_count = actions.shape[0]
+                if observations.shape[0] != transition_count + 1:
+                    raise ValueError(
+                        f"{episode_name}: observations must have T+1 rows"
+                    )
+                for field_name, values in [
+                    ("rewards", rewards),
+                    ("terminations", terminals),
+                    ("truncations", timeouts),
+                ]:
+                    if values.shape[0] != transition_count:
+                        raise ValueError(
+                            f"{episode_name}: {field_name} must have T rows"
+                        )
+                if transition_count and not (terminals[-1] or timeouts[-1]):
+                    timeouts[-1] = True
                 chunks["observations"].append(observations[:-1])
                 chunks["next_observations"].append(observations[1:])
-                chunks["actions"].append(np.asarray(episode["actions"], dtype=np.float32))
-                chunks["rewards"].append(np.asarray(episode["rewards"], dtype=np.float32))
-                chunks["terminals"].append(
-                    np.asarray(episode["terminations"]).astype(bool)
-                )
-                chunks["timeouts"].append(
-                    np.asarray(episode["truncations"]).astype(bool)
-                )
+                chunks["actions"].append(actions)
+                chunks["rewards"].append(rewards)
+                chunks["terminals"].append(terminals)
+                chunks["timeouts"].append(timeouts)
 
         self._dataset = {
             key: np.concatenate(parts, axis=0) for key, parts in chunks.items()
