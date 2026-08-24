@@ -97,6 +97,11 @@ class LearnedContEnv:
         save_dir: str,
         plot_dir: str,
         dataset_path: str = None,
+        wandb_entity: str = None,
+        wandb_project: str = None,
+        wandb_group: str = None,
+        wandb_job_type: str = None,
+        wandb_tags: list = None,
         total_size: int = 128,
         hidden_size: int = 200,  # 4 hidden layers of this size
         has_ln: bool = True,  # layernorm in model
@@ -122,9 +127,12 @@ class LearnedContEnv:
 
         run_name = f"WorldModel-{dataset_name}-S{seed}"
         wandb.init(
-            project=domain,
+            entity=wandb_entity,
+            project=wandb_project or domain,
             name=run_name,
-            group="neubay_world_model",
+            group=wandb_group or "neubay_world_model",
+            job_type=wandb_job_type,
+            tags=wandb_tags,
             config=cfg,
         )
 
@@ -491,6 +499,11 @@ def main(cfg: DictConfig):
     world.train_model(
         dataset_name=config["dataset_name"],
         dataset_path=config.get("dataset_path"),
+        wandb_entity=config.get("wandb_entity"),
+        wandb_project=config.get("wandb_project"),
+        wandb_group=config.get("wandb_group"),
+        wandb_job_type=config.get("wandb_job_type"),
+        wandb_tags=config.get("wandb_tags"),
         seed=config["seed"],
         **config["ensemble"],
     )

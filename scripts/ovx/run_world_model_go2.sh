@@ -95,6 +95,8 @@ apptainer exec \
             --config-path=../configs/go2 \
             --config-name=base \
             dataset_name=${DATASET_NAME} \
+            wandb_group=${DATASET_NAME} \
+            wandb_job_type=world-model-training \
             dataset_path=${DATASET} \
             ensemble.save_dir=${SAVE_DIR} \
             seed=${SEED} \
