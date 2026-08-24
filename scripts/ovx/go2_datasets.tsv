@@ -1,0 +1,9 @@
+# family	variant	huggingface_path	local_dataset_name	sha256	size_bytes
+direction	expert-v0	go2-joystick-direction/expert-v0	Go2JoystickFlatTerrain-direction-expert-v0	58ff9a4061d8f378bdff9e6f2f34d7d04634808259c6439e00bac6e7c1522343	499431808
+direction	medium-expert-v0	go2-joystick-direction/medium-expert-v0	Go2JoystickFlatTerrain-direction-medium-expert-v0	0a704281dd8dbefd86992944e5225755fda003fc10d842488a8d2f2d0f828fb8	510082232
+direction	medium-replay-v0	go2-joystick-direction/medium-replay-v0	Go2JoystickFlatTerrain-direction-medium-replay-v0	12a15665780eeece5827f01f3b42733b201601d0dec605bbb2e073d0122801eb	705581351
+direction	medium-v0	go2-joystick-direction/medium-v0	Go2JoystickFlatTerrain-direction-medium-v0	7a8442dfa598ddf26a9f17a99ff9a53504c92a7d68d29aad2231f2627e641922	499901752
+forward	expert-v0	go2-flat-forward/expert-v0	Go2JoystickFlatTerrain-forward-expert-v0	16acf3f2d7fbec11e2874f1b0d002a7d3d4000f0053a86067662c511f4eb6d60	499431808
+forward	medium-expert-v0	go2-flat-forward/medium-expert-v0	Go2JoystickFlatTerrain-forward-medium-expert-v0	71ab3117e71f7d6e1cad7d4d499347417cb315022f2bee223f5fb34ba10d74ee	509799808
+forward	medium-replay-v0	go2-flat-forward/medium-replay-v0	Go2JoystickFlatTerrain-forward-medium-replay-v0	299068623a932e2dae6e6cddb968bb07f27d3af123471628be4a69ceeea40ebd	700911854
+forward	medium-v0	go2-flat-forward/medium-v0	Go2JoystickFlatTerrain-forward-medium-v0	5a71f05e204262aae08aa41af4471e936a327b9c2515419fb2f298c2641fbd3d	500141184

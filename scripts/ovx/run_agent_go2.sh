@@ -28,6 +28,13 @@
 set -euo pipefail
 
 DATASET_NAME="${1:-Go2JoystickFlatTerrain-direction-expert-v1}"
+RUN_BATCH_ID="${RUN_BATCH_ID:-manual}"
+if [ -z "${DATASET_FAMILY:-}" ]; then
+    case "${DATASET_NAME}" in
+        *-forward-*) DATASET_FAMILY="forward" ;;
+        *) DATASET_FAMILY="direction" ;;
+    esac
+fi
 
 SEED="${SLURM_ARRAY_TASK_ID}"
 RAID_BASE="/raid/${USER}/neubay"
@@ -39,7 +46,9 @@ CACHE_DIR="${RAID_BASE}/.cache"
 CONTAINER_HOME="/home/${USER}"
 WRITABLE_MUJOCO_PY="${CACHE_DIR}/mujoco_py_pkg"
 DATASET="${REPO_DIR}/datasets/${DATASET_NAME}/data/main_data.hdf5"
-CHECKPOINT="${REPO_DIR}/offline_world/ckpt/wm_trained/go2/${DATASET_NAME}/ensemble_seed${SEED}.eqx"
+WORLD_MODEL_SAVE_DIR="${WORLD_MODEL_SAVE_DIR:-offline_world/ckpt/wm_trained/go2}"
+AGENT_SAVE_ROOT="${AGENT_SAVE_ROOT:-offline_agent/ckpt}"
+CHECKPOINT="${REPO_DIR}/${WORLD_MODEL_SAVE_DIR}/${DATASET_NAME}/ensemble_seed${SEED}.eqx"
 
 mkdir -p "${LOG_DIR}" "${WANDB_DIR}" "${CACHE_DIR}/home"
 test -f "${CONTAINER}" || { echo "[ERROR] Container not found: ${CONTAINER}"; exit 1; }
@@ -66,7 +75,8 @@ EXTRA_OVERRIDES=""
 RUN_KIND="full"
 WANDB_JOB_TYPE="world-model-agent-training"
 if [ "${SMOKE_TEST:-false}" = "true" ]; then
-    EXTRA_OVERRIDES="save_agent_root=offline_agent/ckpt_smoke train.grad_steps=2000 eval.times=2 train.buffer_size=200000 collect.parallel_size=100 collect.max_rollout_len=10"
+    AGENT_SAVE_ROOT="offline_agent/ckpt/smoke"
+    EXTRA_OVERRIDES="train.grad_steps=2000 eval.times=2 train.buffer_size=200000 collect.parallel_size=100 collect.max_rollout_len=10"
     RUN_KIND="smoke"
     WANDB_JOB_TYPE="smoke-test"
 fi
@@ -77,11 +87,19 @@ else
     RUN_NAME="NEUBAY-${DATASET_NAME}-S${SEED}"
 fi
 RUN_ID="${RUN_NAME}-J${SLURM_ARRAY_JOB_ID}"
+AGENT_PATH="${REPO_DIR}/${AGENT_SAVE_ROOT}/go2/${DATASET_NAME}/agent_seed${SEED}.eqx"
+if [ "${RUN_KIND}" != "smoke" ] && [ -e "${AGENT_PATH}" ] && [ "${ALLOW_OVERWRITE:-false}" != "true" ]; then
+    echo "[ERROR] Agente já existe: ${AGENT_PATH}" >&2
+    echo "Use outro RUN_BATCH_ID ou ALLOW_OVERWRITE=true conscientemente." >&2
+    exit 1
+fi
 
 echo "============================================"
 echo "Job:        ${SLURM_JOB_ID} (${SLURM_ARRAY_JOB_ID}[${SEED}])"
 echo "Dataset:    ${DATASET}"
 echo "Checkpoint: ${CHECKPOINT}"
+echo "Agent path:  ${AGENT_PATH}"
+echo "Batch:       ${RUN_BATCH_ID}"
 echo "Smoke test: ${SMOKE_TEST:-false}"
 echo "W&B project: neubay-official-results"
 echo "W&B group:   ${DATASET_NAME}"
@@ -108,12 +126,13 @@ apptainer exec \
             --config-name=base \
             task=go2_joystick \
             seed=${SEED} \
+            save_agent_root=${AGENT_SAVE_ROOT} \
             dataset_name=${DATASET_NAME} \
             wandb_group=${DATASET_NAME} \
             dataset_path=${DATASET} \
             exp_name=${RUN_NAME} \
             wandb_run_id=${RUN_ID} \
             wandb_job_type=${WANDB_JOB_TYPE} \
-            wandb_tags=[go2,joystick,world-model-agent,${RUN_KIND}] \
+            wandb_tags=[go2,${DATASET_FAMILY},world-model-agent,${RUN_KIND},${RUN_BATCH_ID}] \
             ${EXTRA_OVERRIDES}
     "

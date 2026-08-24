@@ -163,8 +163,44 @@ sbatch --array=0 --time=01:00:00 --export=ALL,SMOKE_TEST=true \
 ```
 
 World models de smoke são salvos em `offline_world/ckpt/smoke/`; agentes de
-smoke são salvos em `offline_agent/ckpt_smoke/`. Eles nunca sobrescrevem os
+smoke são salvos em `offline_agent/ckpt/smoke/`. Eles nunca sobrescrevem os
 checkpoints completos.
+
+### Pipeline completo: oito datasets Go2
+
+O manifesto `go2_datasets.tsv` contém as quatro variantes de
+`go2-joystick-direction` e as quatro de `go2-flat-forward`, com nome local,
+tamanho e SHA-256. Para baixar tudo de forma retomável e verificável:
+
+```bash
+bash scripts/ovx/download_go2_datasets.sh
+```
+
+Também é possível baixar somente uma família:
+
+```bash
+bash scripts/ovx/download_go2_datasets.sh direction
+bash scripts/ovx/download_go2_datasets.sh forward
+```
+
+Depois de validar os oito datasets, submeta o pipeline completo:
+
+```bash
+RUN_BATCH_ID=go2-full8-20260824 \
+  bash scripts/ovx/submit_go2_full_pipeline.sh
+```
+
+Faça primeiro uma simulação que valida todos os arquivos sem submeter jobs:
+
+```bash
+DRY_RUN=true RUN_BATCH_ID=go2-full8-dryrun \
+  bash scripts/ovx/submit_go2_full_pipeline.sh
+```
+
+O submissor cria três seeds por dataset. Cada array de agentes usa uma
+dependência `afterok` do respectivo array de world models. Checkpoints ficam em
+diretórios versionados pelo lote, sem sobrescrever experimentos anteriores. O
+mapa de IDs SLURM é salvo em `logs/pipelines/<RUN_BATCH_ID>/jobs.tsv`.
 
 Os agentes são salvos em
 `offline_agent/ckpt/go2/Go2JoystickFlatTerrain-direction-expert-v1/`. As runs

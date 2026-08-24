@@ -24,6 +24,13 @@ DATASET_NAME="${1:?Informe o dataset Go2}"
 TOTAL_EPOCHS="${2:-}"
 SEED="${SLURM_ARRAY_TASK_ID}"
 SMOKE_TEST="${SMOKE_TEST:-false}"
+RUN_BATCH_ID="${RUN_BATCH_ID:-manual}"
+if [ -z "${DATASET_FAMILY:-}" ]; then
+    case "${DATASET_NAME}" in
+        *-forward-*) DATASET_FAMILY="forward" ;;
+        *) DATASET_FAMILY="direction" ;;
+    esac
+fi
 
 REPO_DIR="/raid/${USER}/neubay"
 CONTAINER="${REPO_DIR}/neubay.sif"
@@ -47,7 +54,7 @@ fi
 source "${REPO_DIR}/scripts/ovx/load_wandb_env.sh"
 
 DATASET_SHA256="$(sha256sum "${DATASET}" | cut -d' ' -f1)"
-SAVE_DIR="offline_world/ckpt/wm_trained/go2"
+SAVE_DIR="${WORLD_MODEL_SAVE_DIR:-offline_world/ckpt/wm_trained/go2}"
 SMOKE_OVERRIDES=""
 if [ "${SMOKE_TEST}" = "true" ]; then
     SAVE_DIR="offline_world/ckpt/smoke/go2"
@@ -55,6 +62,12 @@ if [ "${SMOKE_TEST}" = "true" ]; then
     SMOKE_OVERRIDES="ensemble.total_size=2 ensemble.hidden_size=32 ensemble.batch_size=1024 +ensemble.max_samples=10000"
 fi
 CHECKPOINT_DIR="${REPO_DIR}/${SAVE_DIR}/${DATASET_NAME}"
+CHECKPOINT_PATH="${CHECKPOINT_DIR}/ensemble_seed${SEED}.eqx"
+if [ "${SMOKE_TEST}" != "true" ] && [ -e "${CHECKPOINT_PATH}" ] && [ "${ALLOW_OVERWRITE:-false}" != "true" ]; then
+    echo "[ERROR] Checkpoint já existe: ${CHECKPOINT_PATH}" >&2
+    echo "Use outro RUN_BATCH_ID ou ALLOW_OVERWRITE=true conscientemente." >&2
+    exit 1
+fi
 
 echo "============================================"
 echo "Job:            ${SLURM_JOB_ID} (${SLURM_ARRAY_JOB_ID}[${SEED}])"
@@ -97,6 +110,7 @@ apptainer exec \
             dataset_name=${DATASET_NAME} \
             wandb_group=${DATASET_NAME} \
             wandb_job_type=world-model-training \
+            wandb_tags=[go2,${DATASET_FAMILY},world-model,${RUN_BATCH_ID}] \
             dataset_path=${DATASET} \
             ensemble.save_dir=${SAVE_DIR} \
             seed=${SEED} \
