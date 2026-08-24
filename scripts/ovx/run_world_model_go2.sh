@@ -23,6 +23,7 @@ set -euo pipefail
 DATASET_NAME="${1:?Informe o dataset Go2}"
 TOTAL_EPOCHS="${2:-}"
 SEED="${SLURM_ARRAY_TASK_ID}"
+SMOKE_TEST="${SMOKE_TEST:-false}"
 
 REPO_DIR="/raid/${USER}/neubay"
 CONTAINER="${REPO_DIR}/neubay.sif"
@@ -46,7 +47,14 @@ fi
 source "${REPO_DIR}/scripts/ovx/load_wandb_env.sh"
 
 DATASET_SHA256="$(sha256sum "${DATASET}" | cut -d' ' -f1)"
-CHECKPOINT_DIR="${REPO_DIR}/offline_world/ckpt/wm_trained/go2/${DATASET_NAME}"
+SAVE_DIR="offline_world/ckpt/wm_trained/go2"
+SMOKE_OVERRIDES=""
+if [ "${SMOKE_TEST}" = "true" ]; then
+    SAVE_DIR="offline_world/ckpt/smoke/go2"
+    TOTAL_EPOCHS="${TOTAL_EPOCHS:-1}"
+    SMOKE_OVERRIDES="ensemble.total_size=2 ensemble.hidden_size=32 ensemble.batch_size=1024 +ensemble.max_samples=10000"
+fi
+CHECKPOINT_DIR="${REPO_DIR}/${SAVE_DIR}/${DATASET_NAME}"
 
 echo "============================================"
 echo "Job:            ${SLURM_JOB_ID} (${SLURM_ARRAY_JOB_ID}[${SEED}])"
@@ -55,6 +63,7 @@ echo "Dataset path:   ${DATASET}"
 echo "Dataset SHA256: ${DATASET_SHA256}"
 echo "Checkpoint dir: ${CHECKPOINT_DIR}"
 echo "Epochs:         ${TOTAL_EPOCHS:-'(padrão do config)'}"
+echo "Smoke test:     ${SMOKE_TEST}"
 echo "============================================"
 
 EPOCHS_ARG=""
@@ -87,7 +96,8 @@ apptainer exec \
             --config-name=base \
             dataset_name=${DATASET_NAME} \
             dataset_path=${DATASET} \
-            ensemble.save_dir=offline_world/ckpt/wm_trained/go2 \
+            ensemble.save_dir=${SAVE_DIR} \
             seed=${SEED} \
+            ${SMOKE_OVERRIDES} \
             ${EPOCHS_ARG}
     "

@@ -106,6 +106,7 @@ class LearnedContEnv:
         batch_size: int = 256,
         lr: float = 0.001,
         weight_decay: float = 0.00001,
+        max_samples: int = None,
     ):
         """
         This function is only called by running this file before RL training.
@@ -130,6 +131,13 @@ class LearnedContEnv:
         X_train, X_valid, Y_train, Y_valid = self.load_world_learning_data(
             domain, original_env
         )
+        if max_samples is not None:
+            if max_samples <= 0:
+                raise ValueError("max_samples must be positive when specified")
+            sample_count = min(max_samples, X_train.shape[0])
+            X_train = X_train[:sample_count]
+            Y_train = Y_train[:sample_count]
+            print(f"Smoke/sample limit enabled: using {sample_count} training samples")
 
         key = jax.random.PRNGKey(seed)
         key, model_key = jax.random.split(key)

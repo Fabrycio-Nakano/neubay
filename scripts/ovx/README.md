@@ -154,6 +154,18 @@ sbatch --array=0-2 scripts/ovx/run_agent_go2.sh "${DATASET_NAME}"
 O log do world model registra o caminho absoluto e o SHA-256 do HDF5 usado.
 Não reutilize os checkpoints medium anteriores à correção de `dataset_path`.
 
+Para validar a infraestrutura sem tocar nos checkpoints completos:
+
+```bash
+sbatch --array=0 --time=01:00:00 --export=ALL,SMOKE_TEST=true \
+  scripts/ovx/run_world_model_go2.sh \
+  Go2JoystickFlatTerrain-direction-medium-replay-v0
+```
+
+World models de smoke são salvos em `offline_world/ckpt/smoke/`; agentes de
+smoke são salvos em `offline_agent/ckpt_smoke/`. Eles nunca sobrescrevem os
+checkpoints completos.
+
 Os agentes são salvos em
 `offline_agent/ckpt/go2/Go2JoystickFlatTerrain-direction-expert-v1/`. As runs
 são registradas no projeto W&B `neubay-official-results`, agrupadas por dataset,

@@ -66,7 +66,7 @@ EXTRA_OVERRIDES=""
 RUN_KIND="full"
 WANDB_JOB_TYPE="world-model-agent-training"
 if [ "${SMOKE_TEST:-false}" = "true" ]; then
-    EXTRA_OVERRIDES="train.grad_steps=2000 eval.times=2 train.buffer_size=200000 collect.parallel_size=100 collect.max_rollout_len=10"
+    EXTRA_OVERRIDES="save_agent_root=offline_agent/ckpt_smoke train.grad_steps=2000 eval.times=2 train.buffer_size=200000 collect.parallel_size=100 collect.max_rollout_len=10"
     RUN_KIND="smoke"
     WANDB_JOB_TYPE="smoke-test"
 fi
