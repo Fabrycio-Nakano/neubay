@@ -129,6 +129,13 @@ sbatch scripts/ovx/run_go2_global_array.sh
 
 Cada item treina o world model e, se ele terminar com sucesso, treina o agente
 correspondente na mesma GPU. Um `RUN_BATCH_ID` exclusivo e derivado do Job ID.
+Para retomar um lote existente, informe seu identificador; checkpoints ja
+concluidos sao detectados e ignorados:
+
+```bash
+sbatch --export=ALL,RUN_BATCH_ID=go2-full8-20260824-r1 \
+  scripts/ovx/run_go2_global_array.sh
+```
 
 ### Go2 Joystick (world-model only)
 

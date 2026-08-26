@@ -47,7 +47,20 @@ echo "Dataset:     ${dataset_name}"
 echo "Seed:        ${seed}"
 echo "Batch:       ${RUN_BATCH_ID}"
 
-# A mesma alocacao/GPU executa as duas etapas em sequencia. O agente so inicia
-# se o world model correspondente terminar com sucesso.
-bash "${REPO_DIR}/scripts/ovx/run_world_model_go2.sh" "${dataset_name}"
+world_checkpoint="${REPO_DIR}/${WORLD_MODEL_SAVE_DIR}/${dataset_name}/ensemble_seed${seed}.eqx"
+agent_checkpoint="${REPO_DIR}/${AGENT_SAVE_ROOT}/go2/${dataset_name}/agent_seed${seed}.eqx"
+
+# Permite retomar o mesmo RUN_BATCH_ID: uma combinacao totalmente pronta e
+# ignorada; se apenas o world model existir, executa somente o agente.
+if [ -f "${agent_checkpoint}" ]; then
+    echo "[SKIP] Agente ja concluido: ${agent_checkpoint}"
+    exit 0
+fi
+
+if [ -f "${world_checkpoint}" ]; then
+    echo "[SKIP] World model ja concluido: ${world_checkpoint}"
+else
+    bash "${REPO_DIR}/scripts/ovx/run_world_model_go2.sh" "${dataset_name}"
+fi
+
 bash "${REPO_DIR}/scripts/ovx/run_agent_go2.sh" "${dataset_name}"
