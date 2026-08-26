@@ -120,6 +120,16 @@ sbatch scripts/ovx/run_agent.sh antmaze medium_play
 
 Cada `sbatch` dispara **3 seeds simultaneamente** como array job. Os logs ficam em `/raid/<user>/neubay/logs/`.
 
+Para executar os oito datasets e as tres seeds com um limite global de quatro
+GPUs, use o array consolidado (24 combinacoes, no maximo 4 simultaneas):
+
+```bash
+sbatch scripts/ovx/run_go2_global_array.sh
+```
+
+Cada item treina o world model e, se ele terminar com sucesso, treina o agente
+correspondente na mesma GPU. Um `RUN_BATCH_ID` exclusivo e derivado do Job ID.
+
 ### Go2 Joystick (world-model only)
 
 O Go2 usa o dataset Minari/HDF5 e checkpoints em
