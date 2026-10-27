@@ -10,6 +10,7 @@ logs/
 
 # soft link
 offline_world/ckpt
+/proximos_passos/
 
 
 #Eu mesmo adicionei
@@ -60,3 +61,6 @@ password_ovx.txt
 papers/*.pdf
 papers/*.pdf:Zone.Identifier
 papers/__pycache__/
+
+# Vídeos Go2 gerados localmente
+/videos_go2_por_dataset/

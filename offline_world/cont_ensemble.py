@@ -16,7 +16,7 @@ import hydra
 from omegaconf import DictConfig, OmegaConf
 import wandb
 
-import gym, d4rl
+import gym
 from experience.wrapper import make_env
 from experience.world_buffer import world_learning_dataset, HistorySampler
 from offline_world.modules import (

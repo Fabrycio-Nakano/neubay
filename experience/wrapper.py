@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 
 import numpy as np
-import gym, d4rl, neorl
+import gym
 from gym import spaces
 from gym.wrappers import TimeLimit
 from gym.core import ActType, ObsType
@@ -128,10 +128,16 @@ def make_env(domain: str, dataset_name: str, dataset_path: str = None):
     if "go2" in domain.lower():
         env = HDF5OfflineEnv(dataset_name, dataset_path=dataset_path)
     elif "neorl" in domain:
+        import neorl
+
         env = neorl.make(dataset_name)
     elif "antmaze" in domain:
+        import d4rl  # Register D4RL environments only when requested.
+
         env = AntMazeWrapper(gym.make(dataset_name))
     else:
+        import d4rl
+
         env = gym.make(dataset_name)
     return env
 

@@ -8,7 +8,7 @@ Reference: https://github.com/kwanyoungpark/LEQ/blob/main/dynamics/termination_f
     where LEQ uses a radius of 0.25 for antmaze tasks, which we also adopt.
 """
 
-import gym, d4rl
+import gym
 import numpy as np
 
 
@@ -235,6 +235,8 @@ class OracleEnv:
         else:
             print("OracleEnv not implemented")
             return
+        import d4rl  # Register environments for simulator-based oracle evaluation.
+
         self.env = gym.make(task)
 
     def reset(self, initial_state):

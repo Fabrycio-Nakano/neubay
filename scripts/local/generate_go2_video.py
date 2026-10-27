@@ -14,6 +14,8 @@ os.environ.setdefault("MUJOCO_GL", "egl")
 
 ROOT = Path(__file__).resolve().parents[2]
 PLAYGROUND = ROOT / "external" / "mujoco_playground"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 if str(PLAYGROUND) not in sys.path:
     sys.path.insert(0, str(PLAYGROUND))
 

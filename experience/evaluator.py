@@ -3,7 +3,7 @@ from jax import random
 import jax.numpy as jnp
 from dataclasses import dataclass, replace
 from online_rl.common import feature_metrics
-import gym, d4rl
+import gym
 import time
 
 

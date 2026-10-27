@@ -1,0 +1,850 @@
+%PDF-1.4
+%âãÏÓ
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 14 /Kids [5 0 R 7 0 R 9 0 R 11 0 R 13 0 R 15 0 R 17 0 R 19 0 R 21 0 R 23 0 R 25 0 R 27 0 R 29 0 R 31 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
+endobj
+6 0 obj
+<< /Length 4309 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Código, adaptações e resultados) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (1) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (Comparação com a versão original • Estado atual, incluindo alterações locais) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 695.00 Tm (Conclusão principal) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 666.90 Tm (O repositório mantém o núcleo algorítmico do NEUBAY e acrescenta a infraestrutura necessária) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 652.90 Tm (para treinar políticas offline para o Unitree Go2. As mudanças centrais estão no adaptador) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 638.90 Tm (HDF5, na configuração do novo domínio, no carregamento rastreável de checkpoints e na avaliação) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 624.90 Tm (posterior em MuJoCo.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 597.90 Tm (Os resultados disponíveis indicam forte dependência do dataset e da seed. Na grade direction) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 583.90 Tm (comparável, medium apresenta maior duração dos episódios. Em forward-medium, duas seeds atingem) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 569.90 Tm (5.000 passos nas três velocidades testadas; a terceira termina antes. Isso demonstra execução) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 555.90 Tm (prolongada em algumas condições, mas ainda não estabelece controle robusto ou superioridade) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 541.90 Tm (sobre o NEUBAY original.) Tj ET
+0.08 0.22 0.31 rg 45 495.29999999999995 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 509.90 Tm (Achado) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 495.29999999999995 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 509.90 Tm (Evidência atual) Tj ET
+0.94 0.96 0.97 rg 45 468.69999999999993 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 483.30 Tm (Núcleo do método preservado) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 468.69999999999993 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 483.30 Tm (Ensemble, losses, planner, buffers, LRU e SAC/REDQ) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 443.70 Tm (sem diferenças em relação à base. |) Tj ET
+0.08 0.22 0.31 rg 45 397.0999999999999 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 411.70 Tm (Direction-medium se destaca) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 397.0999999999999 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 411.70 Tm (231,06 passos médios; 77/207 episódios) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 372.10 Tm (atingem 500 passos na amostra pareada. |) Tj ET
+0.08 0.22 0.31 rg 45 325.4999999999999 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 340.10 Tm (Expert termina cedo) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 325.4999999999999 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 340.10 Tm (41,32 passos médios; 0/207 atingem 500) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 300.50 Tm (na mesma amostra de condições. |) Tj ET
+0.08 0.22 0.31 rg 45 241.2999999999999 181.29999999999998 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 268.50 Tm (Forward-medium é instável entre) Tj ET
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 255.90 Tm (seeds) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 241.2999999999999 322.7 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 268.50 Tm (Seeds 0 e 2: 5.000 passos; seed 1:) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 216.30 Tm (393, 33 e 43, conforme a velocidade. |) Tj ET
+0.08 0.22 0.31 rg 45 157.0999999999999 181.29999999999998 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 184.30 Tm (Comparação com o artigo é) Tj ET
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 171.70 Tm (contextual) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 157.0999999999999 322.7 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 184.30 Tm (O artigo mede score normalizado em outros) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 132.10 Tm (ambientes; aqui há duração e retorno bruto. |) Tj ET
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 8 0 R >>
+endobj
+8 0 obj
+<< /Length 1474 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Código, adaptações e resultados — continuação) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (2) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 722.00 Tm (Escopo e método) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 693.90 Tm (Base original: 5604bad474ed226dfdf8fc4d9d7e959ea6a2afe5, ancestral comum de main e HEAD. Estado) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 679.90 Tm (atual: HEAD 618ff86, mais alterações não commitadas. São 18 commits após a base; o diff dos) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 665.90 Tm (arquivos rastreados contém 60 arquivos, 6.714 inserções e 73 remoções. Scripts locais não) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 651.90 Tm (rastreados foram inspecionados separadamente.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 624.90 Tm (Foram lidos código, configurações, cabeçalhos de checkpoints, manifestos CSV, logs de simulação) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 610.90 Tm (e resultados de probes. As estatísticas foram recalculadas dos arquivos locais. Não houve novo) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 596.90 Tm (treinamento, nova simulação, consulta ao W&B remoto ou alteração do código de treinamento.) Tj ET
+endstream
+endobj
+9 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 10 0 R >>
+endobj
+10 0 obj
+<< /Length 4215 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (O que foi alterado para o Go2) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (3) Tj ET
+0.08 0.22 0.31 rg 45 702.4 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 717.00 Tm (Componente) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 702.4 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 717.00 Tm (Original -> adaptação e efeito) Tj ET
+0.94 0.96 0.97 rg 45 675.8 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 690.40 Tm (experience/wrapper.py) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 675.8 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 690.40 Tm (Gym/D4RL/NeoRL -> HDF5OfflineEnv. Lê grupos episode_*,) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 650.80 Tm (converte T+1 observações em T pares de transição e valida) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 623.80 Tm (comprimentos. Fim sem flag recebe timeout. |) Tj ET
+0.08 0.22 0.31 rg 45 577.1999999999999 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 591.80 Tm (offline_world/cont_ensemble.py) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 577.1999999999999 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 591.80 Tm (Recebe dataset_path e SHA-256; seleciona checkpoint exato) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 552.20 Tm (da seed, verifica metadados e grava atomicamente. Adiciona) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 525.20 Tm (metadados W&B e limite de amostras para smoke tests. |) Tj ET
+0.08 0.22 0.31 rg 45 478.5999999999999 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 493.20 Tm (offline_cont.py) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 478.5999999999999 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 493.20 Tm (Avaliação real passa a ser opcional. Sem ela, deriva as) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 453.60 Tm (dimensões do world model e mantém treino/logging. Salva) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 426.60 Tm (a política atomicamente e permite configurar seu destino. |) Tj ET
+0.08 0.22 0.31 rg 45 379.9999999999999 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 394.60 Tm (offline_world/static_fns.py) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 379.9999999999999 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 394.60 Tm (Adiciona terminação Go2 sempre falsa. Rollouts imaginados) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 355.00 Tm (são limitados pelo horizonte e pela incerteza; a regra não) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 328.00 Tm (representa a queda usada no simulador. |) Tj ET
+0.08 0.22 0.31 rg 45 281.39999999999986 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 296.00 Tm (configs/go2/*.yaml) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 281.39999999999986 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 296.00 Tm (Novo domínio e caminhos. Mantém hiperparâmetros da) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 256.40 Tm (base D4RL locomotion; salva agente e desativa avaliação) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 229.40 Tm (real durante treino. |) Tj ET
+0.08 0.22 0.31 rg 45 182.79999999999987 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 197.40 Tm (scripts/ovx/) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 182.79999999999987 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 197.40 Tm (Manifesto de oito datasets, download com hash e revisão) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 157.80 Tm (fixa, arrays SLURM, Apptainer, dependência WM -> agente,) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 130.80 Tm (lotes separados e retomada/pulo de agentes concluídos. |) Tj ET
+0.08 0.22 0.31 rg 45 84.19999999999987 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 98.80 Tm (scripts/local/) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 84.19999999999987 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 98.80 Tm (Reconstituição do ator, execução MuJoCo e vídeos.) Tj ET
+endstream
+endobj
+11 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 12 0 R >>
+endobj
+12 0 obj
+<< /Length 1745 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (O que foi alterado para o Go2 — continuação) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (4) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (Grade de comandos, manifestos, execução local RTX 4090) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 695.00 Tm (e novo runner para casos que duraram ao menos 100 passos. |) Tj ET
+0.08 0.22 0.31 rg 45 648.4 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 663.00 Tm (papers/) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 648.4 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 663.00 Tm (Probes Ridge/MLP, controles, CSV/JSON e notebooks) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 623.40 Tm (para estudar representações do world model. Não muda) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 596.40 Tm (o aprendizado da política. |) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 569.40 Tm (Mudanças locais ainda não commitadas) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 541.30 Tm (Imports de d4rl/neorl foram removidos do caminho Go2 e passaram a ocorrer sob demanda; o) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 527.30 Tm (gerador de vídeo adiciona a raiz do projeto ao sys.path. Há novos scripts Docker/RTX 4090,) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 513.30 Tm (dependências e runners de variantes. Essas alterações facilitam execução e avaliação, sem) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 499.30 Tm (evidência de mudança das losses ou arquiteturas.) Tj ET
+endstream
+endobj
+13 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 14 0 R >>
+endobj
+14 0 obj
+<< /Length 5631 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Fidelidade ao método e configuração) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (5) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (A comparação direta com 5604bad não encontrou diferenças em offline_world/modules.py,) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 708.00 Tm (offline_world/losses.py, experience/collector.py, experience/world_buffer.py,) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 694.00 Tm (experience/agent_buffer.py, memory/ e online_rl/. Preservar esses módulos não torna os domínios) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 680.00 Tm (equivalentes: os dados, a terminação e a avaliação mudaram.) Tj ET
+0.08 0.22 0.31 rg 45 633.4 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 648.00 Tm (Item) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 633.4 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 648.00 Tm (Configuração Go2 atual) Tj ET
+0.94 0.96 0.97 rg 45 606.8 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 621.40 Tm (Observação / ação) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 606.8 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 621.40 Tm (48 / 12 dimensões) Tj ET
+0.94 0.96 0.97 rg 45 580.1999999999999 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 594.80 Tm (Entrada / alvo do world model) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 580.1999999999999 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 594.80 Tm (60 = estado + ação / 49 = delta de estado + recompensa) Tj ET
+0.94 0.96 0.97 rg 45 553.5999999999999 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 568.20 Tm (Entrada recorrente da política) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 553.5999999999999 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 568.20 Tm (61 = estado + ação anterior + recompensa anterior) Tj ET
+0.94 0.96 0.97 rg 45 526.9999999999999 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 541.60 Tm (Ensemble) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 526.9999999999999 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 541.60 Tm (128 membros; largura 200; LayerNorm; 100 no planejamento) Tj ET
+0.94 0.96 0.97 rg 45 500.39999999999986 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 515.00 Tm (Treino do world model) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 500.39999999999986 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 515.00 Tm (Batch 256; lr 0,001; validação e early stopping preservados) Tj ET
+0.94 0.96 0.97 rg 45 473.79999999999984 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 488.40 Tm (Planejamento) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 473.79999999999984 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 488.40 Tm (epi_mean; quantil 1,0; penalidade 0; sem teto curto explícito) Tj ET
+0.94 0.96 0.97 rg 45 447.1999999999998 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 461.80 Tm (Horizonte do adaptador) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 447.1999999999998 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 461.80 Tm (1.000 passos, fixado em HDF5OfflineEnv) Tj ET
+0.94 0.96 0.97 rg 45 420.5999999999998 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 435.20 Tm (Treino do agente) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 420.5999999999998 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 435.20 Tm (2 milhões de updates; batch 2.048; dados reais 5%) Tj ET
+0.94 0.96 0.97 rg 45 393.9999999999998 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 408.60 Tm (Memória / críticos) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 393.9999999999998 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 408.60 Tm (LRU: 2 camadas, d_model 256, d_hidden 128; 10 críticos) Tj ET
+0.94 0.96 0.97 rg 45 367.39999999999975 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 382.00 Tm (Avaliação no treino) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 367.39999999999975 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 382.00 Tm (eval.enabled=false; real_episodes=0) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 342.40 Tm (Uma diferença experimental relevante) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 314.30 Tm (Os blocos numéricos de treino Go2 seguem a configuração-base D4RL locomotion. O artigo ajusta) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 300.30 Tm (hiperparâmetros por dataset; aplicar um único real_weight=0,05 e learning rate do encoder de) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 286.30 Tm (1e-5 aos oito datasets não equivale ao protocolo de seleção dos melhores hiperparâmetros do) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 272.30 Tm (trabalho original. [R1, R3]) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 245.30 Tm (Fluxo de dados) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 217.20 Tm (HDF5 -> adaptador de transições -> world model probabilístico -> rollouts imaginados + dados reais) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 203.20 Tm (-> ator/críticos recorrentes -> checkpoint -> avaliação MuJoCo. O adaptador fornece dados e) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 189.20 Tm (metadados; ele não implementa um simulador Go2 para avaliação online.) Tj ET
+endstream
+endobj
+15 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 16 0 R >>
+endobj
+16 0 obj
+<< /Length 5876 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Resultados originais: referência externa) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (6) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (Valores do artigo; não são medições Go2 nem novas reproduções locais) Tj ET
+0.08 0.22 0.31 rg 45 675.4 241.89999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 690.00 Tm (Benchmark) Tj ET
+0.08 0.22 0.31 rg 287.4 675.4 115.65 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 293.40 690.00 Tm (NEUBAY) Tj ET
+0.08 0.22 0.31 rg 403.54999999999995 675.4 145.95 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 409.55 690.00 Tm (Referência citada) Tj ET
+0.94 0.96 0.97 rg 45 648.8 241.89999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 663.40 Tm (D4RL locomotion — média) Tj ET
+0.94 0.96 0.97 rg 287.4 648.8 115.65 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 293.40 663.40 Tm (80,1) Tj ET
+0.94 0.96 0.97 rg 403.54999999999995 648.8 145.95 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 409.55 663.40 Tm (VIPO: 83,6) Tj ET
+0.94 0.96 0.97 rg 45 622.1999999999999 241.89999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 636.80 Tm (NeoRL locomotion — média) Tj ET
+0.94 0.96 0.97 rg 287.4 622.1999999999999 115.65 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 293.40 636.80 Tm (64,7) Tj ET
+0.94 0.96 0.97 rg 403.54999999999995 622.1999999999999 145.95 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 409.55 636.80 Tm (VIPO: 73,3) Tj ET
+0.94 0.96 0.97 rg 45 595.5999999999999 241.89999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 610.20 Tm (D4RL Adroit — média) Tj ET
+0.94 0.96 0.97 rg 287.4 595.5999999999999 115.65 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 293.40 610.20 Tm (21,1) Tj ET
+0.94 0.96 0.97 rg 403.54999999999995 595.5999999999999 145.95 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 409.55 610.20 Tm (MoMo: 28,1) Tj ET
+0.94 0.96 0.97 rg 45 568.9999999999999 241.89999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 583.60 Tm (D4RL AntMaze — média) Tj ET
+0.94 0.96 0.97 rg 287.4 568.9999999999999 115.65 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 293.40 583.60 Tm (28,8) Tj ET
+0.94 0.96 0.97 rg 403.54999999999995 568.9999999999999 145.95 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 409.55 583.60 Tm (LEQ: 64,9) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 544.00 Tm (Fonte: Ni et al., arXiv:2512.04341v1, seção 5.1. São scores normalizados. No benchmark D4RL) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 530.00 Tm (locomotion, os autores usam 6 seeds e 20 episódios na avaliação final. As referências) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 516.00 Tm (Adroit/AntMaze acima são baselines model-based citadas no texto. [R1]) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 489.00 Tm (Exemplos do benchmark D4RL locomotion) Tj ET
+0.08 0.22 0.31 rg 45 441.29999999999984 181.29999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 455.90 Tm (Dataset) Tj ET
+0.08 0.22 0.31 rg 226.79999999999998 441.29999999999984 322.7 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 232.80 455.90 Tm (NEUBAY: média ± desvio-padrão) Tj ET
+0.94 0.96 0.97 rg 45 414.6999999999998 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 429.30 Tm (halfcheetah-medium-expert-v2) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 414.6999999999998 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 429.30 Tm (109,5 ± 8,7) Tj ET
+0.94 0.96 0.97 rg 45 388.0999999999998 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 402.70 Tm (hopper-medium-replay-v2) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 388.0999999999998 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 402.70 Tm (110,6 ± 0,7) Tj ET
+0.94 0.96 0.97 rg 45 361.4999999999998 181.29999999999998 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 376.10 Tm (walker2d-medium-expert-v2) Tj ET
+0.94 0.96 0.97 rg 226.79999999999998 361.4999999999998 322.7 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 232.80 376.10 Tm (120,7 ± 1,3) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 336.50 Tm (Como comparar com o Go2) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 308.40 Tm (Os manifestos Go2 medem principalmente quantos passos o episódio executou; os logs) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 294.40 Tm (forward-medium também registram retorno bruto. Não existe uma escala compartilhada com os) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 280.40 Tm (scores D4RL/NeoRL nem um resultado original para Go2 no artigo. Portanto, não se pode calcular) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 266.40 Tm (ganho percentual da adaptação em relação ao artigo.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 239.40 Tm (A comparação defensável é dupla: fidelidade da implementação ao método original e comparação) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 225.40 Tm (entre variantes Go2 sob condições pareadas. A presença de logs locais D4RL de world models não) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 211.40 Tm (resolve essa lacuna: MSE de validação não é retorno da política, e erros de modelos em domínios) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 197.40 Tm (diferentes não compartilham necessariamente a mesma escala.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 170.40 Tm (Não foi identificada uma avaliação A/B no mesmo Go2, com o mesmo dataset e protocolo, que isole) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 156.40 Tm (causalmente o efeito de cada alteração. O código original, sem a interface acrescentada, não) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 142.40 Tm (oferece suporte direto aos HDF5 Go2.) Tj ET
+endstream
+endobj
+17 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 18 0 R >>
+endobj
+18 0 obj
+<< /Length 5436 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Go2 direction: comparação pareada) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (7) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (Lote go2-full8-20260824-r1 • Limite observado de 500 passos) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 695.00 Tm (O manifesto contém 846 registros: 845 execuções com status ok e 1 failed, incluindo 6 registros) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 681.00 Tm (forward-expert. Para direction, a interseção exata de comando, policy_seed e simulation_seed) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 667.00 Tm (resulta em 207 condições por dataset. Os parâmetros vx, vy e yaw_rate também foram exigidos) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 653.00 Tm (iguais. Não há chaves dataset/condição/seed duplicadas.) Tj ET
+0.08 0.22 0.31 rg 45 606.4 156.05 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 621.00 Tm (Dataset) Tj ET
+0.08 0.22 0.31 rg 201.55 606.4 44.949999999999996 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 207.55 621.00 Tm (N) Tj ET
+0.08 0.22 0.31 rg 247.0 606.4 85.35000000000001 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 253.00 621.00 Tm (Média) Tj ET
+0.08 0.22 0.31 rg 332.85 606.4 80.3 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 338.85 621.00 Tm (Mediana) Tj ET
+0.08 0.22 0.31 rg 413.65000000000003 606.4 135.85000000000002 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 419.65 621.00 Tm (Atingiu 500) Tj ET
+0.94 0.96 0.97 rg 45 579.8 156.05 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 594.40 Tm (expert) Tj ET
+0.94 0.96 0.97 rg 201.55 579.8 44.949999999999996 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 207.55 594.40 Tm (207) Tj ET
+0.94 0.96 0.97 rg 247.0 579.8 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 253.00 594.40 Tm (41.32) Tj ET
+0.94 0.96 0.97 rg 332.85 579.8 80.3 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 338.85 594.40 Tm (40) Tj ET
+0.94 0.96 0.97 rg 413.65000000000003 579.8 135.85000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 419.65 594.40 Tm (0/207 \(0.0%\)) Tj ET
+0.94 0.96 0.97 rg 45 553.1999999999999 156.05 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 567.80 Tm (medium-expert) Tj ET
+0.94 0.96 0.97 rg 201.55 553.1999999999999 44.949999999999996 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 207.55 567.80 Tm (207) Tj ET
+0.94 0.96 0.97 rg 247.0 553.1999999999999 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 253.00 567.80 Tm (39.69) Tj ET
+0.94 0.96 0.97 rg 332.85 553.1999999999999 80.3 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 338.85 567.80 Tm (38) Tj ET
+0.94 0.96 0.97 rg 413.65000000000003 553.1999999999999 135.85000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 419.65 567.80 Tm (0/207 \(0.0%\)) Tj ET
+0.94 0.96 0.97 rg 45 526.5999999999999 156.05 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 541.20 Tm (medium-replay) Tj ET
+0.94 0.96 0.97 rg 201.55 526.5999999999999 44.949999999999996 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 207.55 541.20 Tm (207) Tj ET
+0.94 0.96 0.97 rg 247.0 526.5999999999999 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 253.00 541.20 Tm (89.38) Tj ET
+0.94 0.96 0.97 rg 332.85 526.5999999999999 80.3 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 338.85 541.20 Tm (57) Tj ET
+0.94 0.96 0.97 rg 413.65000000000003 526.5999999999999 135.85000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 419.65 541.20 Tm (8/207 \(3.9%\)) Tj ET
+0.94 0.96 0.97 rg 45 499.9999999999999 156.05 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 514.60 Tm (medium) Tj ET
+0.94 0.96 0.97 rg 201.55 499.9999999999999 44.949999999999996 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 207.55 514.60 Tm (207) Tj ET
+0.94 0.96 0.97 rg 247.0 499.9999999999999 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 253.00 514.60 Tm (231.06) Tj ET
+0.94 0.96 0.97 rg 332.85 499.9999999999999 80.3 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 338.85 514.60 Tm (93) Tj ET
+0.94 0.96 0.97 rg 413.65000000000003 499.9999999999999 135.85000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 419.65 514.60 Tm (77/207 \(37.2%\)) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 475.00 Tm (Medium dura 5,59 vezes mais que expert em média nesta grade, mas isso é uma razão de duração) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 461.00 Tm (observada, não de recompensa ou qualidade de locomoção. Sua mediana de 93 passos, muito abaixo) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 447.00 Tm (da média, revela uma distribuição heterogênea. Medium-replay melhora sobre expert, porém só) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 433.00 Tm (3,9% atingem o limite.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 406.00 Tm (Atingir 500 significa chegar ao teto da execução; não prova completar uma tarefa ou seguir a) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 392.00 Tm (velocidade solicitada. Status ok significa que o processo de geração terminou sem erro, mesmo) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 378.00 Tm (quando o episódio terminou cedo. As condições compartilham políticas e não são 207 seeds de) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 364.00 Tm (treinamento independentes. [R4]) Tj ET
+endstream
+endobj
+19 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 20 0 R >>
+endobj
+20 0 obj
+<< /Length 6756 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Sensibilidade às seeds e cobertura) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (8) Tj ET
+0.08 0.22 0.31 rg 45 702.4 171.20000000000002 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 717.00 Tm (Direction) Tj ET
+0.08 0.22 0.31 rg 216.70000000000002 702.4 110.6 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 222.70 717.00 Tm (Seed 0) Tj ET
+0.08 0.22 0.31 rg 327.8 702.4 110.6 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 333.80 717.00 Tm (Seed 1) Tj ET
+0.08 0.22 0.31 rg 438.9 702.4 110.6 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 444.90 717.00 Tm (Seed 2) Tj ET
+0.94 0.96 0.97 rg 45 675.8 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 690.40 Tm (expert) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 675.8 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 690.40 Tm (36.7 / 0) Tj ET
+0.94 0.96 0.97 rg 327.8 675.8 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 690.40 Tm (41.7 / 0) Tj ET
+0.94 0.96 0.97 rg 438.9 675.8 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 690.40 Tm (45.3 / 0) Tj ET
+0.94 0.96 0.97 rg 45 649.1999999999999 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 663.80 Tm (medium-expert) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 649.1999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 663.80 Tm (37.4 / 0) Tj ET
+0.94 0.96 0.97 rg 327.8 649.1999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 663.80 Tm (39.5 / 0) Tj ET
+0.94 0.96 0.97 rg 438.9 649.1999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 663.80 Tm (42.1 / 0) Tj ET
+0.94 0.96 0.97 rg 45 622.5999999999999 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 637.20 Tm (medium-replay) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 622.5999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 637.20 Tm (104.1 / 3) Tj ET
+0.94 0.96 0.97 rg 327.8 622.5999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 637.20 Tm (106.8 / 4) Tj ET
+0.94 0.96 0.97 rg 438.9 622.5999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 637.20 Tm (56.9 / 1) Tj ET
+0.94 0.96 0.97 rg 45 595.9999999999999 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 610.60 Tm (medium) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 595.9999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 610.60 Tm (255.0 / 29) Tj ET
+0.94 0.96 0.97 rg 327.8 595.9999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 610.60 Tm (281.4 / 33) Tj ET
+0.94 0.96 0.97 rg 438.9 595.9999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 610.60 Tm (159.0 / 16) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 571.00 Tm (Cada célula: média de passos / quantidade que atingiu 500, usando todos os registros ok de cada) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 557.00 Tm (seed. São 70 condições por seed, exceto medium seed 1 \(69\). Esta tabela é descritiva, não a) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 543.00 Tm (amostra pareada de 207 da página anterior.) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 516.00 Tm (Experimentos disponíveis e o que eles permitem afirmar) Tj ET
+0.08 0.22 0.31 rg 45 468.29999999999984 241.89999999999998 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 482.90 Tm (Conjunto) Tj ET
+0.08 0.22 0.31 rg 287.4 468.29999999999984 115.65 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 293.40 482.90 Tm (Registros) Tj ET
+0.08 0.22 0.31 rg 403.54999999999995 468.29999999999984 145.95 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 409.55 482.90 Tm (Interpretação) Tj ET
+0.94 0.96 0.97 rg 45 429.09999999999985 241.89999999999998 39.2 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 456.30 Tm (Legacy expert-v1) Tj ET
+0.94 0.96 0.97 rg 287.4 429.09999999999985 115.65 39.2 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 293.40 456.30 Tm (120 ok) Tj ET
+0.94 0.96 0.97 rg 403.54999999999995 429.09999999999985 145.95 39.2 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 409.55 456.30 Tm (Seeds 0 e 2: médias 54,07 e) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 409.55 443.70 Tm (60,00;) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 404.10 Tm (nenhuma execução chega a 500. |) Tj ET
+0.08 0.22 0.31 rg 45 344.89999999999986 241.89999999999998 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 372.10 Tm (Full8 / grade principal) Tj ET
+0.08 0.22 0.31 rg 287.4 344.89999999999986 115.65 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 293.40 372.10 Tm (845 ok; 1 failed) Tj ET
+0.08 0.22 0.31 rg 403.54999999999995 344.89999999999986 145.95 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 409.55 372.10 Tm (Direction tem cobertura) Tj ET
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 409.55 359.50 Tm (ampla; forward) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 319.90 Tm (ainda incompleto nessa grade. |) Tj ET
+0.08 0.22 0.31 rg 45 260.6999999999999 241.89999999999998 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 287.90 Tm (Refeito / 06-10) Tj ET
+0.08 0.22 0.31 rg 287.4 260.6999999999999 115.65 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 293.40 287.90 Tm (108 ok; 42 failed) Tj ET
+0.08 0.22 0.31 rg 403.54999999999995 260.6999999999999 145.95 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 409.55 287.90 Tm (Condições e checkpoints se) Tj ET
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 409.55 275.30 Tm (sobrepõem) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 235.70 Tm (a outros conjuntos; não somar como réplicas. |) Tj ET
+0.08 0.22 0.31 rg 45 176.4999999999999 241.89999999999998 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 203.70 Tm (vx=1 / 06-10) Tj ET
+0.08 0.22 0.31 rg 287.4 176.4999999999999 115.65 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 293.40 203.70 Tm (13 ok; 2 failed) Tj ET
+0.08 0.22 0.31 rg 403.54999999999995 176.4999999999999 145.95 39.2 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 409.55 203.70 Tm (Todas as execuções ok têm) Tj ET
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 409.55 191.10 Tm (27–116 passos;) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 151.50 Tm (cobertura desigual entre datasets. |) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 124.50 Tm (Nos cabeçalhos locais há 15 agentes do lote Full8 distribuídos por 6 datasets: 12 direction, 2) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 110.50 Tm (forward-expert e 1 forward-medium-expert. Outro lote possui 3 agentes forward-medium. A) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 96.50 Tm (existência do pipeline Full8 não comprova que os 24 agentes estejam concluídos e disponíveis) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 82.50 Tm (neste checkout.) Tj ET
+endstream
+endobj
+21 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 22 0 R >>
+endobj
+22 0 obj
+<< /Length 935 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Sensibilidade às seeds e cobertura — continuação) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (9) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (Não foram combinados registros de lotes ou reexecuções diferentes para inflar a amostra. As) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 708.00 Tm (seeds do simulador dependem do índice da condição no runner; ao filtrar a lista, o mesmo nome) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 694.00 Tm (de comando pode receber outra seed. Por isso a comparação principal usa todos os campos do) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 680.00 Tm (protocolo, e não somente o nome da condição. [R4, R5]) Tj ET
+endstream
+endobj
+23 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 24 0 R >>
+endobj
+24 0 obj
+<< /Length 7661 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Go2 forward-medium: testes longos) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (10) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (Lote go2-ordenado-20260930T145042 • Seed do simulador 0) Tj ET
+0.08 0.22 0.31 rg 45 675.4 171.20000000000002 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 690.00 Tm (vx solicitado) Tj ET
+0.08 0.22 0.31 rg 216.70000000000002 675.4 110.6 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 222.70 690.00 Tm (Seed política) Tj ET
+0.08 0.22 0.31 rg 327.8 675.4 110.6 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 333.80 690.00 Tm (Passos) Tj ET
+0.08 0.22 0.31 rg 438.9 675.4 110.6 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 444.90 690.00 Tm (Retorno bruto) Tj ET
+0.94 0.96 0.97 rg 45 648.8 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 663.40 Tm (1.0) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 648.8 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 663.40 Tm (0) Tj ET
+0.94 0.96 0.97 rg 327.8 648.8 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 663.40 Tm (5000) Tj ET
+0.94 0.96 0.97 rg 438.9 648.8 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 663.40 Tm (98.014) Tj ET
+0.94 0.96 0.97 rg 45 622.1999999999999 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 636.80 Tm (1.0) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 622.1999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 636.80 Tm (1) Tj ET
+0.94 0.96 0.97 rg 327.8 622.1999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 636.80 Tm (393) Tj ET
+0.94 0.96 0.97 rg 438.9 622.1999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 636.80 Tm (6.106) Tj ET
+0.94 0.96 0.97 rg 45 595.5999999999999 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 610.20 Tm (1.0) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 595.5999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 610.20 Tm (2) Tj ET
+0.94 0.96 0.97 rg 327.8 595.5999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 610.20 Tm (5000) Tj ET
+0.94 0.96 0.97 rg 438.9 595.5999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 610.20 Tm (99.305) Tj ET
+0.94 0.96 0.97 rg 45 568.9999999999999 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 583.60 Tm (1.5) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 568.9999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 583.60 Tm (0) Tj ET
+0.94 0.96 0.97 rg 327.8 568.9999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 583.60 Tm (5000) Tj ET
+0.94 0.96 0.97 rg 438.9 568.9999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 583.60 Tm (29.576) Tj ET
+0.94 0.96 0.97 rg 45 542.3999999999999 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 557.00 Tm (1.5) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 542.3999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 557.00 Tm (1) Tj ET
+0.94 0.96 0.97 rg 327.8 542.3999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 557.00 Tm (33) Tj ET
+0.94 0.96 0.97 rg 438.9 542.3999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 557.00 Tm (0.034) Tj ET
+0.94 0.96 0.97 rg 45 515.7999999999998 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 530.40 Tm (1.5) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 515.7999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 530.40 Tm (2) Tj ET
+0.94 0.96 0.97 rg 327.8 515.7999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 530.40 Tm (5000) Tj ET
+0.94 0.96 0.97 rg 438.9 515.7999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 530.40 Tm (31.837) Tj ET
+0.94 0.96 0.97 rg 45 489.1999999999998 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 503.80 Tm (2.0) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 489.1999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 503.80 Tm (0) Tj ET
+0.94 0.96 0.97 rg 327.8 489.1999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 503.80 Tm (5000) Tj ET
+0.94 0.96 0.97 rg 438.9 489.1999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 503.80 Tm (10.187) Tj ET
+0.94 0.96 0.97 rg 45 462.5999999999998 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 477.20 Tm (2.0) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 462.5999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 477.20 Tm (1) Tj ET
+0.94 0.96 0.97 rg 327.8 462.5999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 477.20 Tm (43) Tj ET
+0.94 0.96 0.97 rg 438.9 462.5999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 477.20 Tm (0.024) Tj ET
+0.94 0.96 0.97 rg 45 435.9999999999998 171.20000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 450.60 Tm (2.0) Tj ET
+0.94 0.96 0.97 rg 216.70000000000002 435.9999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 222.70 450.60 Tm (2) Tj ET
+0.94 0.96 0.97 rg 327.8 435.9999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 450.60 Tm (5000) Tj ET
+0.94 0.96 0.97 rg 438.9 435.9999999999998 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 450.60 Tm (6.892) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 411.00 Tm (Seis das nove execuções chegam a 5.000 passos: todas das seeds 0 e 2. A seed 1 termina aos 393) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 397.00 Tm (passos em vx=1,0; aos 33 em vx=1,5; e aos 43 em vx=2,0. O controle local usa dt=0,02 s; 5.000) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 383.00 Tm (passos correspondem a 100 s de simulação. [R6]) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 356.00 Tm (Duração alta não garante boa resposta ao comando) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 327.90 Tm (Entre vx=1,0 e vx=2,0, o retorno cai de 98,014 para 10,187 na seed 0 \(-89,6%\) e de 99,305 para) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 313.90 Tm (6,892 na seed 2 \(-93,1%\), apesar da mesma duração. A recompensa inclui vários termos; esses) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 299.90 Tm (valores, isoladamente, não medem o erro de tracking. É necessário registrar a velocidade) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 285.90 Tm (efetiva para concluir se o robô obedece ao comando.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 258.90 Tm (Esses nove testes usam uma única seed do simulador, ruído observacional desligado e política) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 244.90 Tm (determinística. Não são diretamente comparáveis à grade direction de 500 passos, que usa outros) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 230.90 Tm (comandos, seeds e checkpoints. Não foram contados vídeos duplicados ou variantes RTX 4090 como) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 216.90 Tm (replicações independentes.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 189.90 Tm (O limite de 5.000 foi observado nos logs, enquanto o adaptador de treino fixa horizonte 1.000.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 175.90 Tm (O runner de vídeo chama o ambiente diretamente e interrompe por done ou pelo limite solicitado;) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 161.90 Tm (não há garantia de um TimeLimit idêntico ao do treino.) Tj ET
+endstream
+endobj
+25 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 26 0 R >>
+endobj
+26 0 obj
+<< /Length 7052 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (World model: probes e interpretação) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (11) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (Resultados scaled_mlp_v2 • Dataset legacy direction-expert-v1) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 695.00 Tm (Os probes usam 10.000 transições, world-model seeds 0 e 2, membro 0 do ensemble e três seeds) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 681.00 Tm (para o MLP. Os CSVs registram 6.429 exemplos de treino, 1.525 de validação e 2.046 de teste. O) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 667.00 Tm (código utiliza divisão por grupos quando disponíveis. São medidas de informação decodificável,) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 653.00 Tm (não retorno da política. [R7]) Tj ET
+0.08 0.22 0.31 rg 45 606.4 85.35000000000001 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 51.00 621.00 Tm (Seed WM) Tj ET
+0.08 0.22 0.31 rg 130.85000000000002 606.4 196.45000000000002 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 136.85 621.00 Tm (Alvo na camada h4) Tj ET
+0.08 0.22 0.31 rg 327.80000000000007 606.4 110.6 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 333.80 621.00 Tm (R2 Ridge) Tj ET
+0.08 0.22 0.31 rg 438.9000000000001 606.4 110.6 26.6 re f
+BT /F2 9 Tf 1 1 1 rg 1 0 0 1 444.90 621.00 Tm (R2 MLP) Tj ET
+0.94 0.96 0.97 rg 45 579.8 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 594.40 Tm (0) Tj ET
+0.94 0.96 0.97 rg 130.85000000000002 579.8 196.45000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 136.85 594.40 Tm (delta_obs) Tj ET
+0.94 0.96 0.97 rg 327.80000000000007 579.8 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 594.40 Tm (0.7137) Tj ET
+0.94 0.96 0.97 rg 438.9000000000001 579.8 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 594.40 Tm (0.6613) Tj ET
+0.94 0.96 0.97 rg 45 553.1999999999999 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 567.80 Tm (0) Tj ET
+0.94 0.96 0.97 rg 130.85000000000002 553.1999999999999 196.45000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 136.85 567.80 Tm (next_obs) Tj ET
+0.94 0.96 0.97 rg 327.80000000000007 553.1999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 567.80 Tm (0.7469) Tj ET
+0.94 0.96 0.97 rg 438.9000000000001 553.1999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 567.80 Tm (0.7707) Tj ET
+0.94 0.96 0.97 rg 45 526.5999999999999 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 541.20 Tm (0) Tj ET
+0.94 0.96 0.97 rg 130.85000000000002 526.5999999999999 196.45000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 136.85 541.20 Tm (reward) Tj ET
+0.94 0.96 0.97 rg 327.80000000000007 526.5999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 541.20 Tm (0.9245) Tj ET
+0.94 0.96 0.97 rg 438.9000000000001 526.5999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 541.20 Tm (0.8963) Tj ET
+0.94 0.96 0.97 rg 45 499.9999999999999 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 514.60 Tm (2) Tj ET
+0.94 0.96 0.97 rg 130.85000000000002 499.9999999999999 196.45000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 136.85 514.60 Tm (delta_obs) Tj ET
+0.94 0.96 0.97 rg 327.80000000000007 499.9999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 514.60 Tm (0.7146) Tj ET
+0.94 0.96 0.97 rg 438.9000000000001 499.9999999999999 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 514.60 Tm (0.6591) Tj ET
+0.94 0.96 0.97 rg 45 473.39999999999986 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 488.00 Tm (2) Tj ET
+0.94 0.96 0.97 rg 130.85000000000002 473.39999999999986 196.45000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 136.85 488.00 Tm (next_obs) Tj ET
+0.94 0.96 0.97 rg 327.80000000000007 473.39999999999986 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 488.00 Tm (0.7533) Tj ET
+0.94 0.96 0.97 rg 438.9000000000001 473.39999999999986 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 488.00 Tm (0.7712) Tj ET
+0.94 0.96 0.97 rg 45 446.79999999999984 85.35000000000001 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 51.00 461.40 Tm (2) Tj ET
+0.94 0.96 0.97 rg 130.85000000000002 446.79999999999984 196.45000000000002 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 136.85 461.40 Tm (reward) Tj ET
+0.94 0.96 0.97 rg 327.80000000000007 446.79999999999984 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 333.80 461.40 Tm (0.9275) Tj ET
+0.94 0.96 0.97 rg 438.9000000000001 446.79999999999984 110.6 26.6 re f
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 444.90 461.40 Tm (0.8939) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 421.80 Tm (Na camada h4, Ridge decodifica a recompensa com R2 próximo de 0,925–0,928 e supera o MLP também) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 407.80 Tm (em delta_obs. O MLP tem vantagem para next_obs nessa camada. Isso indica representação) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 393.80 Tm (preditiva útil, mas não assegura precisão em rollouts longos ou em estados escolhidos pela) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 379.80 Tm (política fora do dataset.) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 352.80 Tm (Cuidado com o significado físico dos probes) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 324.70 Tm (build_targets usa obs[:, :2] para alvos chamados xy. No simulador Go2 local, as três primeiras) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 310.70 Tm (componentes são velocidades lineares locais, não posição global. Portanto, esses rótulos não) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 296.70 Tm (autorizam afirmar aprendizado de localização ou navegação. A semântica do dataset histórico) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 282.70 Tm (deve ser conferida com a versão do coletor; nesta análise não foram usados esses alvos para) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 268.70 Tm (concluir desempenho espacial.) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 241.70 Tm (Histórico de treinamento incorretamente rotulado) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 213.60 Tm (A auditoria de 23/08/2026 relata world models medium-replay idênticos aos expert-v1, com MSE) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 199.60 Tm (0,1424 / 0,1421 / 0,1421. Esses números não são apresentados como desempenho medium válido. Os) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 185.60 Tm (world models históricos correspondentes não estão disponíveis no caminho auditado deste) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 171.60 Tm (checkout; a igualdade de hashes é evidência documental anterior, não uma nova verificação) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 157.60 Tm (executada aqui. [R8]) Tj ET
+endstream
+endobj
+27 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 28 0 R >>
+endobj
+28 0 obj
+<< /Length 4429 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Limitações concretas e próximos passos) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (12) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 722.00 Tm (1. Terminação imaginada diverge da simulação) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 693.90 Tm (termination_fn_go2 retorna sempre False. O simulador local termina quando) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 679.90 Tm (get_upvector\(data\)[-1] < 0. A observação contém gravidade projetada, então a alegação no) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 665.90 Tm (comentário de que falhas seriam impossíveis de inferir das 48 dimensões precisa ser reavaliada:) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 651.90 Tm (há informação de orientação potencialmente útil. Uma regra equivalente exige validar convenções) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 637.90 Tm (e ruído; ela não foi implementada nesta análise.) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 610.90 Tm (2. Proveniência é melhor, mas não é absoluta) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 582.80 Tm (O SHA-256 é passado pelos scripts e salvo nos checkpoints. O Python compara metadados, mas não) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 568.80 Tm (recalcula o hash do HDF5 nesse caminho. Checkpoints legados sem hash ainda são aceitos com) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 554.80 Tm (aviso. O carregador também permite fallback de seed e de caminho de dataset; executar) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 540.80 Tm (diretamente pode contornar as validações mais estritas dos scripts SLURM.) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 513.80 Tm (3. Cobertura experimental ainda é desigual) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 485.70 Tm (Os cabeçalhos dos 18 agentes importados dos lotes Full8/ordenado concordam com dataset, seed e) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 471.70 Tm (SHA-256 do manifesto, mas isso não prova integralmente o histórico de execução. Faltam) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 457.70 Tm (resultados homogêneos para todos os oito datasets e repetição das condições em múltiplas seeds) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 443.70 Tm (de simulação. O runner survivors_1000 seleciona casos que já duraram pelo menos 100 passos;) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 429.70 Tm (seus resultados, se produzidos, devem ser identificados como amostra selecionada.) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 402.70 Tm (4. Medir o objetivo de controle) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 374.60 Tm (O próximo benchmark deve salvar retorno por episódio, passos, motivo de término e RMSE das) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 360.60 Tm (velocidades linear/lateral/angular em relação ao comando, além de usar o mesmo horizonte e) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 346.60 Tm (grade em todas as variantes. Reportar média e dispersão entre seeds de treinamento, sem tratar) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 332.60 Tm (comandos de uma mesma política como treinos independentes.) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 305.60 Tm (5. Isolar causas antes de atribuir ganhos) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 277.50 Tm (Comparar BC ou a política coletora no mesmo simulador, validar observações/ações/recompensa e) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 263.50 Tm (versão do ambiente, e fazer ablações de terminação, mistura real/imaginada e limiar de) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 249.50 Tm (incerteza. Só então atribuir uma mudança de desempenho a uma modificação específica do método.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 222.50 Tm (Veredito: a adaptação funcional está estabelecida e há políticas capazes de execuções longas em) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 208.50 Tm (condições específicas. A evidência atual ainda não demonstra robustez geral do Go2 nem) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 194.50 Tm (reproduz, em escala comparável, o benchmark do artigo original.) Tj ET
+endstream
+endobj
+29 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 30 0 R >>
+endobj
+30 0 obj
+<< /Length 4029 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Fontes e rastreabilidade) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (13) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm ([R1] Ni et al. Long-Horizon Model-Based Offline Reinforcement Learning Without Conservatism.) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 709.40 Tm (arXiv:2512.04341v1 \(04/12/2025\), seção 5.1 e apêndice G. https://arxiv.org/html/2512.04341v1 — consultado) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 696.80 Tm (em 14/10/2026.) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 671.20 Tm ([R2] Git local: base 5604bad474ed226dfdf8fc4d9d7e959ea6a2afe5; HEAD 618ff86. Comparação: git diff) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 658.60 Tm (5604bad; git diff --; git merge-base main HEAD. A análise inclui alterações locais e scripts não) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 646.00 Tm (rastreados.) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 620.40 Tm ([R3] experience/wrapper.py; offline_world/cont_ensemble.py; offline_world/static_fns.py; offline_cont.py;) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 607.80 Tm (configs/go2/base.yaml; configs/d4rl_loco/base.yaml; scripts/ovx/go2_datasets.tsv.) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 582.20 Tm ([R4] videos/experiment_variants/go2-full8-20260824-r1/manifest.csv. Comparação principal: status=ok,) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 569.60 Tm (quatro datasets direction, interseção de condition/policy_seed/simulation_seed/vx/vy/yaw_rate.) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 544.00 Tm ([R5] videos/variants/manifest.csv; videos/experiment_variants/go2-refeito-20261006-143849/manifest.csv;) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 531.40 Tm (videos/experiment_variants/go2-vel1-20261006-160240/manifest.csv; cabeçalhos em) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 518.80 Tm (offline_agent/ckpt/imported/.) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 493.20 Tm ([R6] videos/forward_medium/ovx_go2-ordenado-20260930T145042_seed*_vx*_sim0.log;) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 480.60 Tm (scripts/local/generate_go2_video.py;) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 468.00 Tm (external/mujoco_playground/mujoco_playground/_src/locomotion/go2/joystick.py.) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 442.40 Tm ([R7] papers/probe_outputs/*seed{0,2}__member__scaled_mlp_v2__probe_results.csv e respectivos) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 429.80 Tm (summary.json; papers/run_linear_probes_neubay.py.) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 404.20 Tm ([R8] docs/audits/auditoria_go2_expert_medium.md; docs/audits/diferencas_neubay_original_go2.md;) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 391.60 Tm (local_validation/go2/auditoria_pipeline_go2_full8.md. Documentos anteriores utilizados como contexto, com) Tj ET
+BT /F1 9 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 379.00 Tm (ressalvas quando não reverificáveis.) Tj ET
+BT /F2 11.5 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 353.40 Tm (Impressão digital da principal fonte de resultados) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 325.30 Tm (SHA-256 do manifesto Full8: a4425dea0906843e2bbaee4104ab60c55c4a75aba2da8e8cef964771667b80c5) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 298.30 Tm (Os resultados foram obtidos de arquivos presentes no checkout no momento da análise. O PDF não) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 284.30 Tm (implica sincronização com o cluster ou com projetos remotos, nem validação física no robô real.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 270.30 Tm (As porcentagens de teto e médias são descritivas; episódios encerrados no limite são censurados) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 256.30 Tm (à direita.) Tj ET
+endstream
+endobj
+31 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 32 0 R >>
+endobj
+32 0 obj
+<< /Length 2094 >>
+stream
+BT /F2 9 Tf 0 0.47 0.51 rg 1 0 0 1 45.00 794.00 Tm (NEUBAY / GO2) Tj ET
+BT /F2 17 Tf 0.08 0.22 0.31 rg 1 0 0 1 45.00 766.00 Tm (Comparação visual dos resultados Go2) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 26.00 Tm (Análise do checkout local • 14 de outubro de 2026) Tj ET
+BT /F1 8 Tf 0.2 0.27 0.32 rg 1 0 0 1 538.00 26.00 Tm (14) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 722.00 Tm (Direction: média de passos na amostra pareada de 207 condições por dataset. O teto é 500) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 708.00 Tm (passos; a duração não mede diretamente recompensa ou seguimento de comando.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 654.00 Tm (expert) Tj ET
+0.08 0.22 0.31 rg 165 646.0 51.648550724625004 25 re f
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 221.65 654.00 Tm (41.32) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 604.00 Tm (medium-expert) Tj ET
+0.08 0.22 0.31 rg 165 596.0 49.607487922749996 25 re f
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 219.61 604.00 Tm (39.69) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 554.00 Tm (medium-replay) Tj ET
+0 0.47 0.51 rg 165 546.0 111.72101449275002 25 re f
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 281.72 554.00 Tm (89.38) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 504.00 Tm (medium) Tj ET
+0.82 0.53 0.15 rg 165 496.0 288.822463768125 25 re f
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 458.82 504.00 Tm (231.06) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 446.00 Tm (Medium apresenta a maior duração observada, mas a mediana de 93 passos e a variação entre seeds) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 432.00 Tm (mostram que o comportamento não é uniforme. Expert e medium-expert não atingem 500 passos nas) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 418.00 Tm (condições pareadas.) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 391.00 Tm (Fonte: videos/experiment_variants/go2-full8-20260824-r1/manifest.csv. Os valores foram) Tj ET
+BT /F1 10 Tf 0.2 0.27 0.32 rg 1 0 0 1 45.00 377.00 Tm (recalculados na análise; ver método e ressalvas nas seções anteriores.) Tj ET
+endstream
+endobj
+xref
+0 33
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000211 00000 n 
+0000000308 00000 n 
+0000000410 00000 n 
+0000000546 00000 n 
+0000004907 00000 n 
+0000005043 00000 n 
+0000006569 00000 n 
+0000006706 00000 n 
+0000010974 00000 n 
+0000011112 00000 n 
+0000012910 00000 n 
+0000013048 00000 n 
+0000018732 00000 n 
+0000018870 00000 n 
+0000024799 00000 n 
+0000024937 00000 n 
+0000030426 00000 n 
+0000030564 00000 n 
+0000037373 00000 n 
+0000037511 00000 n 
+0000038498 00000 n 
+0000038636 00000 n 
+0000046350 00000 n 
+0000046488 00000 n 
+0000053593 00000 n 
+0000053731 00000 n 
+0000058213 00000 n 
+0000058351 00000 n 
+0000062433 00000 n 
+0000062571 00000 n 
+trailer
+<< /Size 33 /Root 1 0 R >>
+startxref
+64718
+%%EOF
