@@ -109,6 +109,74 @@ sbatch scripts/ovx/run_agent.sh adroit pen_cloned
 sbatch scripts/ovx/run_agent.sh adroit hammer_cloned
 ```
 
+Para comparar **WM Hammer treinado do zero + agente novo** com **WM Hammer
+pré-treinado + agente novo**, use o pipeline específico:
+
+```bash
+# Depois de sincronizar estes scripts por commit para a OVX:
+DRY_RUN=true bash scripts/ovx/submit_hammer_comparison.sh
+
+# Validação curta das duas condições e do treino do WM, somente seed 0:
+SMOKE_TEST=true SEEDS=0 bash scripts/ovx/submit_hammer_comparison.sh
+
+# Treino completo: seeds 0, 1 e 2 nas duas condições.
+RUN_BATCH_ID=hammer-comparacao-01 \
+  bash scripts/ovx/submit_hammer_comparison.sh
+```
+
+O array executa, por seed e na mesma GPU: (1) treinar WM do zero,
+(2) treinar agente sobre esse WM, (3) treinar outro agente sobre o WM
+pré-treinado da mesma seed. São **três WMs novos e seis agentes novos**;
+no máximo três GPUs simultâneas. Para usar uma GPU por vez, informe
+`MAX_PARALLEL=1`. Cada item reserva até 72 horas para as três etapas.
+Se uma etapa falhar, as próximas dessa seed não são executadas; as demais
+seeds do array são independentes. Um novo envio deve usar outro identificador
+de lote: o pipeline não retoma treinos interrompidos nem substitui resultados.
+
+Os WMs pré-treinados são lidos de
+`offline_world/ckpt/pretrained/adroit/hammer-cloned-v1/ensemble_seed{0,1,2}.eqx`
+e permanecem intactos. O pipeline exige o checkpoint exato de cada seed e,
+no modo completo, verifica ensemble de 128 membros, largura 400 e LayerNorm,
+correspondentes à arquitetura configurada para o novo WM. O treino do WM
+usa o limite original de **1200 épocas**, com early stopping; esse limite
+pode ser alterado por `TOTAL_EPOCHS`.
+
+Os dois agentes usam `configs/adroit/base.yaml` com `task=hammer_cloned`,
+mesmos parâmetros, seed e dataset D4RL. No treino completo, são 2 milhões
+de passos de gradiente por agente, com avaliação no simulador habilitada.
+O dataset continua no cache D4RL da home persistente do contêiner. Seu
+download inicial é protegido por lock entre as seeds. Caminho e SHA-256
+do dataset, hash do WM pré-treinado e cabeçalho são registrados em
+`logs/pipelines/<lote>/seed<seed>/inputs.json`.
+Um checkpoint antigo sem SHA-256 do dataset não permite confirmar a
+identidade dos dados usados originalmente para pré-treiná-lo; esse limite
+de proveniência permanece registrado no cabeçalho e nos logs.
+
+No modo completo, os novos checkpoints ficam em:
+
+```text
+offline_world/ckpt/experiments/<lote>/adroit/hammer-cloned-v1/ensemble_seed<seed>.eqx
+offline_agent/ckpt/experiments/<lote>/scratch/adroit/hammer-cloned-v1/agent_seed<seed>.eqx
+offline_agent/ckpt/experiments/<lote>/pretrained/adroit/hammer-cloned-v1/agent_seed<seed>.eqx
+```
+
+No W&B, os projetos são `world_models_adroit` e `agents_adroit`, agrupados
+pelo lote. Os nomes dos agentes incluem `scratch` ou `pretrained` e a seed.
+Compare `test_envs/normalized_score` e `test_envs/reward` no mesmo número
+de passos (`count/grad_step`) e agregue as três seeds de cada condição.
+Retornos brutos de Hammer e Go2 têm escalas distintas; a comparação direta
+das duas condições é feita dentro do Hammer.
+
+Os logs SLURM são `logs/hammer_compare_<job>_<seed>.{out,err}`; os IDs ficam
+em `logs/pipelines/<lote>/jobs.tsv`. Código rastreado deve estar commitado
+e permanecer no mesmo commit até os jobs terminarem. `DRY_RUN=true` valida
+caminhos e imprime a submissão, sem iniciar jobs nem carregar o dataset.
+
+O modo smoke salva sob `ckpt/smoke/<lote>/` e reduz o WM para 2 membros,
+largura 32, 10 mil amostras e 1 época. Ambos os agentes usam 2 membros,
+2 mil passos, rollouts de até 10 passos e 2 episódios por avaliação.
+Esses resultados servem para validar a execução e não entram na comparação.
+
 ### AntMaze
 
 ```bash
@@ -118,7 +186,9 @@ sbatch scripts/ovx/run_agent.sh antmaze medium_diverse
 sbatch scripts/ovx/run_agent.sh antmaze medium_play
 ```
 
-Cada `sbatch` dispara **3 seeds simultaneamente** como array job. Os logs ficam em `/raid/<user>/neubay/logs/`.
+Nos scripts genéricos de agente, informe `--array=0-2` explicitamente para
+executar três seeds. O pipeline Hammer já usa essas três seeds por padrão.
+Os logs ficam em `/raid/<user>/neubay/logs/`.
 
 Para executar os oito datasets e as tres seeds com um limite global de quatro
 GPUs, use o array consolidado (24 combinacoes, no maximo 4 simultaneas):
